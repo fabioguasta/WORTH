@@ -58,7 +58,7 @@ Tutti i membri del progetto hanno gli stessi diritti (il creatore stesso è un m
 * leggere i messaggi dalla chat di progetto;
 * cancellare il progetto.
 
-Di seguito sono specificate le operazioni offerte dal servizio. In sede di implementazione è possibile
+Di seguito sono specificate le __operazioni offerte dal servizio__. In sede di implementazione è possibile
 aggiungere ulteriori parametri, se necessario.
 
 _register(nickUtente, password)_: per inserire un nuovo utente, il server mette a disposizione una operazione
@@ -79,3 +79,34 @@ _listOnlineusers()_: utilizzata da un utente per visualizzare la lista dei nickU
 in quel momento.
 
 _listProjects()_: operazione per recuperare la lista dei progetti di cui l’utente è membro.
+
+_createProject(projectName)_: operazione per richiedere la creazione di un nuovo progetto. Se l’operazione
+va a buon fine, il progetto è creato e ha come membro l’utente che ne ha richiesto la creazione.
+
+_addMember(projectName, nickUtente)_: operazione per aggiungere l’utente nickUtente al progetto
+projectname. Se l’utente è registrato l’aggiunta come membro è eseguita senza chiedere il consenso a
+nickUtente, se l’utente non è registrato l’operazione non può essere completata e il servizio restituisce un
+messaggio di errore.
+
+_showMembers(projectName)_: operazione per recuperare la lista dei membri del progetto.
+
+_showCards(projectName)_: operazione per recuperare la lista di card associate ad un progetto projectName.
+
+_showCard(projectName, cardName)_: operazione per recuperare le informazioni (nome, descrizione
+testuale, lista in cui si trova in quel momento) della card cardName associata ad un progetto projectName.
+
+_addCard(projectName, cardName, descrizione)_: operazione per richiedere l’aggiunta della card di nome
+cardName al progetto projectname. La card deve essere accompagnata da una breve testo descrittivo. La
+card viene automaticamente inserita nella lista TODO.
+
+_moveCard(projectName, cardName, listaPartenza, listaDestinazione)_: operazione per richiedere lo
+spostamento della card di nome cardName al progetto projectname dalla lista listaPartenza alla lista
+listaDestinazione.
+
+_getCardHistory(projectName, cardName)_: operazione per richiedere la “storia” della card, ovvero la
+sequenza di eventi di spostamento della card, dalla creazione allo spostamento più recente.
+
+_readChat(projectName)_: operazione per visualizzare i messaggi della chat del progetto projectName
+sendChatMsg(projectName, messaggio): l’utente invia un messaggio alla chat del progetto projectName
+cancelProject(projectName): un membro di progetto chiede di cancellare un progetto. L’operazione può
+essere completata con successo solo se tutte le card sono nella lista DONE.
