@@ -117,5 +117,5 @@ essere completata con successo solo se tutte le card sono nella lista DONE.
 
 Permessi | Utente | Membro di progetto
 ------------ | ------------ | ------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
+listUsers | x | 
+
