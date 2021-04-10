@@ -107,6 +107,8 @@ _getCardHistory(projectName, cardName)_: operazione per richiedere la “storia�
 sequenza di eventi di spostamento della card, dalla creazione allo spostamento più recente.
 
 _readChat(projectName)_: operazione per visualizzare i messaggi della chat del progetto projectName
-sendChatMsg(projectName, messaggio): l’utente invia un messaggio alla chat del progetto projectName
-cancelProject(projectName): un membro di progetto chiede di cancellare un progetto. L’operazione può
+
+_sendChatMsg(projectName, messaggio)_: l’utente invia un messaggio alla chat del progetto projectName
+
+_cancelProject(projectName)_: un membro di progetto chiede di cancellare un progetto. L’operazione può
 essere completata con successo solo se tutte le card sono nella lista DONE.
