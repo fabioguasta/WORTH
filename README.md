@@ -117,5 +117,10 @@ essere completata con successo solo se tutte le card sono nella lista DONE.
 
 Permessi | Utente | Membro di progetto
 ------------ | ------------ | ------------
-_listUsers_ | <div align="center">x</div> | 
+_listUsers_ | <div align="center">x</div> |
+_listOnlineUsers_ | <div align="center"> x </div> |
+_listProjects_ | <div align="center"> x </div> |
+_createProject_ | <div align="center"> x </div> |
+_addMember_ | | <div align="center"> x </div> 
+_showMember_ | | <div align="center"> x </div> 
 
