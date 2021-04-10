@@ -35,4 +35,12 @@ Ad ogni progetto è associata una chat di gruppo, e tutti i membri di quel proge
 effettuato il login), possono ricevere e inviare i messaggi sulla chat. Sulla chat il sistema invia inoltre
 automaticamente le notifiche di eventi legati allo spostamento di una card del progetto da una lista
 all’altra.  
-<div style="text-align:center"><img src="img/fig1.png"></div>
+![fig1](/img/fig1.png)
+Un utente registrato e dopo login eseguita con successo ha i permessi per:
+* recuperare la lista di tutti gli utenti registrati al servizio;
+* recuperare la lista di tutti gli utenti registrati al servizio e colleggati al servizio (in stato online);
+* creare un progetto;
+* recuperare la lista dei progetti di cui è membro
+Un utente che ha creato un progetto ne diventa automaticamente un membro. Può aggiungere altri utenti registrati come membri del progetto.
+Tutti i membri del progetto hanno gli stessi diritti (il creatore stesso è un membro come tutti gli altri), in particolare:
+* 
