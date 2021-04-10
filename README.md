@@ -1,5 +1,6 @@
 # WORTH
 Network Laboratory project (course of University of Pisa) 
+
 ### Descrizione del problema
 Negli ultimi anni sono state create numerose applicazioni collaborative, per la condivisione di contenuti,
 messaggistica, videoconferenza, gestione di progetti, ecc. In questo progetto didattico, __WORTH__
@@ -17,6 +18,7 @@ dopo che è stata superata con successo la fase di revisione. Una persona del gr
 in carico un’attività quando ne ha la possibilità, spostando l’attività sulla lavagna.
 Il progetto consiste nell’implementazione di WORkTogetHer (WORTH): uno strumento per la gestione di
 progetti collaborativi che si ispira ad alcuni principi della metodologia Kanban.
+
 ### Specifica delle operazioni
 Gli utenti possono accedere a WORTH dopo registrazione e login.
 In WORTH, un progetto, identificato da un nome univoco, è costituito da una serie di “card” (“carte”), che
