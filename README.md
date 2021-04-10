@@ -115,3 +115,7 @@ _sendChatMsg(projectName, messaggio)_: l’utente invia un messaggio alla chat d
 _cancelProject(projectName)_: un membro di progetto chiede di cancellare un progetto. L’operazione può
 essere completata con successo solo se tutte le card sono nella lista DONE.
 
+First Header | Second Header
+------------ | -------------
+Content from cell 1 | Content from cell 2
+Content in the first column | Content in the second column
