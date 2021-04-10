@@ -40,7 +40,7 @@ Un utente registrato e dopo login eseguita con successo ha i permessi per:
 * recuperare la lista di tutti gli utenti registrati al servizio;
 * recuperare la lista di tutti gli utenti registrati al servizio e colleggati al servizio (in stato online);
 * creare un progetto;
-* recuperare la lista dei progetti di cui è membro
+* recuperare la lista dei progetti di cui è membro  
 Un utente che ha creato un progetto ne diventa automaticamente un membro. Può aggiungere altri utenti registrati come membri del progetto.
 Tutti i membri del progetto hanno gli stessi diritti (il creatore stesso è un membro come tutti gli altri), in particolare:
 * 
