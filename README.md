@@ -38,6 +38,7 @@ effettuato il login), possono ricevere e inviare i messaggi sulla chat. Sulla ch
 automaticamente le notifiche di eventi legati allo spostamento di una card del progetto da una lista
 all’altra.  
 ![fig1](/img/fig1.png)
+
 Un utente registrato e dopo login eseguita con successo ha i permessi per:
 * recuperare la lista di tutti gli utenti registrati al servizio;
 * recuperare la lista di tutti gli utenti registrati al servizio e colleggati al servizio (in stato online);
