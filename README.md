@@ -117,5 +117,5 @@ essere completata con successo solo se tutte le card sono nella lista DONE.
 
 Permessi | Utente | Membro di progetto
 ------------ | ------------ | ------------
-listUsers | x | 
+_listUsers_ | x | 
 
