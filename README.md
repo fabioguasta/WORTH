@@ -45,7 +45,8 @@ Un utente registrato e dopo login eseguita con successo ha i permessi per:
 * recuperare la lista di tutti gli utenti registrati al servizio;
 * recuperare la lista di tutti gli utenti registrati al servizio e colleggati al servizio (in stato online);
 * creare un progetto;
-* recuperare la lista dei progetti di cui è membro.<br/>
+* recuperare la lista dei progetti di cui è membro.
+
 Un utente che ha creato un progetto ne diventa automaticamente un membro. Può aggiungere altri utenti registrati come membri del progetto.
 Tutti i membri del progetto hanno gli stessi diritti (il creatore stesso è un membro come tutti gli altri), in particolare:
 * aggiungere altri utenti registrati come membri del progetto;
@@ -65,36 +66,52 @@ aggiungere ulteriori parametri, se necessario.
 _register(nickUtente, password)_: per inserire un nuovo utente, il server mette a disposizione una operazione
 di registrazione di un utente. Il server risponde con un codice che può indicare l’avvenuta registrazione,
 oppure, se il nickname è già presente, o se la password è vuota, restituisce un messaggio d’errore. Come
-specificato in seguito, le registrazioni sono tra le informazioni da persistere.<br/>
+specificato in seguito, le registrazioni sono tra le informazioni da persistere.
+
 _login(nickUtente, password)_: login di un utente già registrato per accedere al servizio. Il server risponde con
 un codice che può indicare l’avvenuto login, oppure, se l’utente ha già effettuato la login o la password è
-errata, restituisce un messaggio d’errore.<br/>
-_logout(nickUtente)_: effettua il logout dell’utente dal servizio.<br/>
+errata, restituisce un messaggio d’errore.
+
+_logout(nickUtente)_: effettua il logout dell’utente dal servizio.
+
 _listUsers()_: utilizzata da un utente per visualizzare la lista dei nickUtente registrati al servizio e il loro stato
-(online o offline).<br/>
+(online o offline).
+
 _listOnlineusers()_: utilizzata da un utente per visualizzare la lista dei nickUtente registrati al servizio e online
-in quel momento.<br/>
-_listProjects()_: operazione per recuperare la lista dei progetti di cui l’utente è membro.<br/>
+in quel momento.
+
+_listProjects()_: operazione per recuperare la lista dei progetti di cui l’utente è membro.
+
 _createProject(projectName)_: operazione per richiedere la creazione di un nuovo progetto. Se l’operazione
-va a buon fine, il progetto è creato e ha come membro l’utente che ne ha richiesto la creazione.<br/>
+va a buon fine, il progetto è creato e ha come membro l’utente che ne ha richiesto la creazione.
+
 _addMember(projectName, nickUtente)_: operazione per aggiungere l’utente nickUtente al progetto
 projectname. Se l’utente è registrato l’aggiunta come membro è eseguita senza chiedere il consenso a
 nickUtente, se l’utente non è registrato l’operazione non può essere completata e il servizio restituisce un
-messaggio di errore.<br/>
-_showMembers(projectName)_: operazione per recuperare la lista dei membri del progetto.<br/>
-_showCards(projectName)_: operazione per recuperare la lista di card associate ad un progetto projectName.<br/>
+messaggio di errore.
+
+_showMembers(projectName)_: operazione per recuperare la lista dei membri del progetto.
+
+_showCards(projectName)_: operazione per recuperare la lista di card associate ad un progetto projectName.
+
 _showCard(projectName, cardName)_: operazione per recuperare le informazioni (nome, descrizione
-testuale, lista in cui si trova in quel momento) della card cardName associata ad un progetto projectName.<br/>
+testuale, lista in cui si trova in quel momento) della card cardName associata ad un progetto projectName.
+
 _addCard(projectName, cardName, descrizione)_: operazione per richiedere l’aggiunta della card di nome
 cardName al progetto projectname. La card deve essere accompagnata da una breve testo descrittivo. La
-card viene automaticamente inserita nella lista TODO.<br/>
+card viene automaticamente inserita nella lista TODO.
+
 _moveCard(projectName, cardName, listaPartenza, listaDestinazione)_: operazione per richiedere lo
 spostamento della card di nome cardName al progetto projectname dalla lista listaPartenza alla lista
-listaDestinazione.<br/>
+listaDestinazione.
+
 _getCardHistory(projectName, cardName)_: operazione per richiedere la “storia” della card, ovvero la
-sequenza di eventi di spostamento della card, dalla creazione allo spostamento più recente.<br/>
-_readChat(projectName)_: operazione per visualizzare i messaggi della chat del progetto projectName <br/>
-_sendChatMsg(projectName, messaggio)_: l’utente invia un messaggio alla chat del progetto projectName <br/>
+sequenza di eventi di spostamento della card, dalla creazione allo spostamento più recente.
+
+_readChat(projectName)_: operazione per visualizzare i messaggi della chat del progetto projectName 
+
+_sendChatMsg(projectName, messaggio)_: l’utente invia un messaggio alla chat del progetto projectName 
+
 _cancelProject(projectName)_: un membro di progetto chiede di cancellare un progetto. L’operazione può
 essere completata con successo solo se tutte le card sono nella lista DONE.
 
