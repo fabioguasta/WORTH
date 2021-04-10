@@ -60,16 +60,22 @@ Tutti i membri del progetto hanno gli stessi diritti (il creatore stesso è un m
 
 Di seguito sono specificate le operazioni offerte dal servizio. In sede di implementazione è possibile
 aggiungere ulteriori parametri, se necessario.
+
 _register(nickUtente, password)_: per inserire un nuovo utente, il server mette a disposizione una operazione
 di registrazione di un utente. Il server risponde con un codice che può indicare l’avvenuta registrazione,
 oppure, se il nickname è già presente, o se la password è vuota, restituisce un messaggio d’errore. Come
 specificato in seguito, le registrazioni sono tra le informazioni da persistere.
+
 _login(nickUtente, password)_: login di un utente già registrato per accedere al servizio. Il server risponde con
 un codice che può indicare l’avvenuto login, oppure, se l’utente ha già effettuato la login o la password è
 errata, restituisce un messaggio d’errore.
+
 _logout(nickUtente)_: effettua il logout dell’utente dal servizio.
+
 _listUsers()_: utilizzata da un utente per visualizzare la lista dei nickUtente registrati al servizio e il loro stato
 (online o offline).
+
 _listOnlineusers()_: utilizzata da un utente per visualizzare la lista dei nickUtente registrati al servizio e online
 in quel momento.
+
 _listProjects()_: operazione per recuperare la lista dei progetti di cui l’utente è membro.
