@@ -131,3 +131,45 @@ _readChat_ | | <div align="center"> x </div>
 _sendChatMsg_ | | <div align="center"> x </div>
 _cancelProject_ | | <div align="center"> x </div>
 
+### Specifiche per l'implementazione
+Nella realizzazione del progetto devono essere utilizzate molte delle tecnologie illustrate durante il corso. In
+particolare:
+* la fase di registrazione viene implementata mediante RMI.
+* La fase di login deve essere effettuata come prima operazione dopo aver instaurato una
+connessione TCP con il server. In risposta all'operazione di login, il server invia anche la lista degli
+utenti registrati e il loro stato (online, offline), in alternativa la lista degli utenti e il loro stato può essere restituita dal server invece che nella risposta di login in quella alla registrazione della callback RMI. A seguito della login il client si registra ad un servizio
+di notifica del server per ricevere aggiornamenti sullo stato degli utenti registrati (online/offline). Il
+servizio di notifica deve essere implementato con il meccanismo di RMI callback. Il client mantiene
+una struttura dati per tenere traccia della lista degli utenti registrati e il loro stato (online/offline),
+la lista viene quindi aggiornata a seguito della ricezione di una callback, attraverso la quale il server
+manda gli aggiornamenti: nuove registrazioni, cambiamento di stato di utenti registrati
+(online/offline).
+* dopo previa login effettuata con successo, l'utente interagisce, secondo il modello client-server
+(richieste/risposte), con il server sulla connessione TCP creata, inviando i comandi elencati in
+precedenza. Tutte le operazioni sono effettuate su questa connessione TCP, eccetto la registrazione
+(RMI), le operazioni di recupero della lista degli utenti (_listUsers_ e _listOnlineusers_) che usano la
+struttura dati locale del client aggiornata tramite il meccanismo di RMI callback (come descritto al
+punto precedente) e le operazioni sulla chat.
+* Il server può essere realizzato multithreaded oppure può effettuare il multiplexing dei canali
+mediante NIO.
+* L'utente interagisce con WORTH mediante un client che può utilizzare una semplice interfaccia
+grafica, oppure una interfaccia a linea di comando, definendo un insieme di comandi, presentati in
+un menu.
+* Deve essere implementata una struttura dati separata per ciascuna lista di progetto (ovvero
+quattro liste per progetto).
+* La chat di progetto deve essere realizzata usando UDP multicast (un client può inviare direttamente
+i messaggi ad altri client). _Ogni chat di progetto ha un indirizzo IP multicast diverso, scelto dal server al momento della creazione del progetto. La modalità con cui il server comunica ai client i riferimenti per unirsi alla chat è a scelta dello studente._
+* Implementazione della chat: nel caso in cui si decida di implementare l'interfaccia grafica, essa
+prevederà due semplici aree di testo in cui rispettivamente inserire/ricevere i messaggi testuali
+inviati alla chat. In questo caso, i messaggi vengono immediatamente presentati all'utente, mano a
+mano che vengono ricevuti. Invece, nel caso si preferisca una interazione con WORTH a linea di
+comando, saranno definiti due comandi per, rispettivamente, inviare nuovi messaggi alla
+chat/ricevere tutti i messaggi ricevuti a partire dall'ultima esecuzione del comando di
+visualizzazione messaggi. In questo caso, i messaggi vengono presentati all'utente in modo
+asincrono, su sua richiesta.
+* Il server persiste lo stato del sistema, in particolare: le informazioni di registrazione, la lista dei
+progetti (inclusi membri, card e lo stato delle liste). Lo stato dei progetti deve essere reso
+persistente sul file system come descritto di seguito: una directory per ogni progetto e un file per
+ogni card del progetto (sul file sono accodati gli eventi di spostamento relativi alla card). I messaggi
+delle chat non devono essere persistiti. Quando il server viene riavviato tali informazioni sono
+utilizzate per ricostruire lo stato del sistema.
