@@ -1,6 +1,6 @@
 # WORTH
 Network Laboratory project (course of University of Pisa) 
-## Descrizione del problema
+### Descrizione del problema
 Negli ultimi anni sono state create numerose applicazioni collaborative, per la condivisione di contenuti,
 messaggistica, videoconferenza, gestione di progetti, ecc. In questo progetto didattico, __WORTH__
 (WORkTogetHer), ci focalizzeremo sull’organizzazione e la gestione di progetti in modo collaborativo. Le
