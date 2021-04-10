@@ -16,7 +16,7 @@ giapponese), un metodo di gestione “agile”. La lavagna Kanban fornisce una v
 ne visualizza l’evoluzione, ad esempio dalla creazione e il successivo progresso fino al completamento,
 dopo che è stata superata con successo la fase di revisione. Una persona del gruppo di lavoro può prendere
 in carico un’attività quando ne ha la possibilità, spostando l’attività sulla lavagna.
-Il progetto consiste nell’implementazione di WORkTogetHer (WORTH): uno strumento per la gestione di
+Il progetto consiste nell’implementazione di __WORkTogetHer (WORTH)__: uno strumento per la gestione di
 progetti collaborativi che si ispira ad alcuni principi della metodologia Kanban.
 
 ### Specifica delle operazioni
