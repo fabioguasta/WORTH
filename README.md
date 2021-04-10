@@ -39,7 +39,7 @@ Ad ogni progetto è associata una chat di gruppo, e tutti i membri di quel proge
 effettuato il login), possono ricevere e inviare i messaggi sulla chat. Sulla chat il sistema invia inoltre
 automaticamente le notifiche di eventi legati allo spostamento di una card del progetto da una lista
 all’altra.  
-<p align="center"> ![fig1](/img/fig1.png) </p>
+![fig1](/img/fig1.png)
 
 Un utente registrato e dopo login eseguita con successo ha i permessi per:
 * recuperare la lista di tutti gli utenti registrati al servizio;
@@ -115,7 +115,6 @@ _sendChatMsg(projectName, messaggio)_: l’utente invia un messaggio alla chat d
 _cancelProject(projectName)_: un membro di progetto chiede di cancellare un progetto. L’operazione può
 essere completata con successo solo se tutte le card sono nella lista DONE.
 
-<div align="center">
 Permessi | Utente | Membro di progetto
 ------------ | ------------ | ------------
 _listUsers_ | <div align="center"> x </div> |
@@ -132,4 +131,4 @@ _getCardHistory_ | | <div align="center"> x </div>
 _readChat_ | | <div align="center"> x </div>
 _sendChatMsg_ | | <div align="center"> x </div>
 _cancelProject_ | | <div align="center"> x </div>
-</div>
+
