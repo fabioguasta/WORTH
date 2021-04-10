@@ -110,7 +110,7 @@ sequenza di eventi di spostamento della card, dalla creazione allo spostamento p
 
 _readChat(projectName)_: operazione per visualizzare i messaggi della chat del progetto projectName
 
-_sendChatMsg(projectName, messaggio)_: l’utente invia un messaggio alla chat del progetto projectName
-
+_sendChatMsg(projectName, messaggio)_: l’utente invia un messaggio alla chat del progetto projectName <br/>
 _cancelProject(projectName)_: un membro di progetto chiede di cancellare un progetto. L’operazione può
 essere completata con successo solo se tutte le card sono nella lista DONE.
+
