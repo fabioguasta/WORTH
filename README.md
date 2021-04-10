@@ -35,4 +35,4 @@ Ad ogni progetto è associata una chat di gruppo, e tutti i membri di quel proge
 effettuato il login), possono ricevere e inviare i messaggi sulla chat. Sulla chat il sistema invia inoltre
 automaticamente le notifiche di eventi legati allo spostamento di una card del progetto da una lista
 all’altra.
-![figura1](/img/fig1.png)
+![plot](/img/fig1.png)
