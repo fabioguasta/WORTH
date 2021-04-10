@@ -36,4 +36,3 @@ effettuato il login), possono ricevere e inviare i messaggi sulla chat. Sulla ch
 automaticamente le notifiche di eventi legati allo spostamento di una card del progetto da una lista
 all’altra.
 ![figura1](/img/fig1.png)
-Format: ![Alt Text](url)
