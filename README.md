@@ -116,6 +116,6 @@ _cancelProject(projectName)_: un membro di progetto chiede di cancellare un prog
 essere completata con successo solo se tutte le card sono nella lista DONE.
 
 Permessi | Utente | Membro di progetto
------------- | ----------
+------------ | ---------- | ---------
 Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
