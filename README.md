@@ -102,7 +102,7 @@ cardName al progetto projectname. La card deve essere accompagnata da una breve 
 card viene automaticamente inserita nella lista TODO.
 
 _moveCard(projectName, cardName, listaPartenza, listaDestinazione)_: operazione per richiedere lo
-spostamento della card di nome cardName al progetto projectname dalla lista listaPartenza alla lista
+spostamento della card di nome _cardName_ al progetto projectname dalla lista listaPartenza alla lista
 listaDestinazione.
 
 _getCardHistory(projectName, cardName)_: operazione per richiedere la “storia” della card, ovvero la
@@ -117,10 +117,18 @@ essere completata con successo solo se tutte le card sono nella lista DONE.
 
 Permessi | Utente | Membro di progetto
 ------------ | ------------ | ------------
-_listUsers_ | <div align="center">x</div> |
+_listUsers_ | <div align="center"> x </div> |
 _listOnlineUsers_ | <div align="center"> x </div> |
 _listProjects_ | <div align="center"> x </div> |
 _createProject_ | <div align="center"> x </div> |
 _addMember_ | | <div align="center"> x </div> 
 _showMember_ | | <div align="center"> x </div> 
+_showCards_ | | <div align="center"> x </div>
+_showCard_ | | <div align="center"> x </div>
+_addCard_ | | <div align="center"> x </div>
+_moveCard_| | <div align="center"> x </div>
+_getCardHistory_ | | <div align="center"> x </div>
+_readChat_ | | <div align="center"> x </div>
+_sendChatMsg_ | | <div align="center"> x </div>
+_cancelProject_ | | <div align="center"> x </div>
 
