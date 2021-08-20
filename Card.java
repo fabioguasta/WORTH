@@ -62,8 +62,8 @@ public class Card{
     }
 
     //restituisce tutte le informazioni relative alla Card
-    @JsonIgnore
-    public List<String> getInformation(){
+    @JsonIgnore 
+    public List<String> getInformation(){ 
         List<String> info= new ArrayList<>();
         info.add(this.name);
         info.add(this.description);
