@@ -5,11 +5,12 @@ import java.util.List;
 
 /* Le Card rappresentano i compiti da svolgere per portare a termine un determinato progetto univoco.
  Queste sono identificate da nome, descrizione, stato attuale e cronologia di tutti gli stati. */
+ 
 public class Card{
     public enum cardStatus {TODO, INPROGRESS, TOBEREVISED, DONE}
     private String name;
     private String description;
-    private cardStatus currentState;
+    private cardStatus currenStatus;
     private List<cardStatus> cardHistory;
 
     public Card (String name, String description){
@@ -39,8 +40,8 @@ public class Card{
         return this.name;
     }
 
-    public void setName(String name){
-        this.name=name;
+    public void setName(String Name){
+        this.name=Name;
     }
 
     //restituiscono e settano la descrizione della Card
@@ -74,7 +75,7 @@ public class Card{
 
     //cambia lo stato attuale della Card e lo aggiunge alla cronologia degli stati
     @JsonIgnore
-    public void changeStatus(String status){
+    public void changeState(String status){
         this.currentState= cardStatus.valueOf(status.toUpperCase());
         this.cardHistory.add(currentState);
     }
