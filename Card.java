@@ -44,15 +44,6 @@ public class Card{
         this.name=Name;
     }
 
-    //restituiscono e settano la descrizione della Card
-    public String getDescription(){
-        return this.description;
-    }
-    
-    public void setDescription(String desc){
-        this.description=desc;
-    }
-
     //restituiscono e settano lo stato attuale della Card
     public String getcurrentState()
         return this.currentState.name();
@@ -60,6 +51,15 @@ public class Card{
 
     public void setcurrentState(String currentState){
         this.currentState=cardStatus.valueOf(currentState.toUpperCase());
+    }
+
+    //restituiscono e settano la descrizione della Card
+    public String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(String desc){
+        this.description=desc;
     }
 
     //restituisce tutte le informazioni relative alla Card
