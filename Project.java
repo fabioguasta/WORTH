@@ -2,6 +2,9 @@ import Utils.Utils;
 
 import java.Utils.ArrayList;
 import java.util.List;
+
+import Exceptions.CardNotFoundException;
+import Exceptions.IllegalChangeStateException;
 /* I Project rappresentano i singoli progetti e contiene una lista di oggetti Card. 
 Fornisce i metodi per la gestione delle Card, aggiunta di membri al progetto e partecipazione chat */
 
@@ -88,7 +91,7 @@ public class Project {
     }
 
     //Restituisce una Card a partire dal nome (univoco)
-    public Card getCard (String Name) throws CardNotFoundException{
+    public Card getCard (String Name) throws CardNotFoundException(){
         for(Card card : cards){
             if(card.getName().equals(Name))
             return card;
