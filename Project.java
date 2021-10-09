@@ -1,8 +1,6 @@
-import Utils.Utils;
-
-import java.Utils.ArrayList;
+import Utility.Utils;
+import java.util.ArrayList;
 import java.util.List;
-
 import Exceptions.CardNotFoundException;
 import Exceptions.IllegalChangeStateException;
 /* I Project rappresentano i singoli progetti e contiene una lista di oggetti Card. 
@@ -27,7 +25,7 @@ public class Project {
         this.cardsInprogress= new ArrayList<>();
         this.cardsToberevised= new ArrayList<>();
         this.cardsDone= new ArrayList<>();
-        this.IPMulticast= Utils.randomMulticastIpv4();
+        this.IPMulticast= Utils.randomMulticastipv4();
         this.members= new ArrayList<>();
     }
 

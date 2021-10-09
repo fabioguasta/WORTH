@@ -10,7 +10,7 @@ public class Card{
     public enum cardStatus {TODO, INPROGRESS, TOBEREVISED, DONE}
     private String name;
     private String description;
-    private cardStatus currenStatus;
+    private cardStatus currentState;
     private List<cardStatus> cardHistory;
 
     public Card (String name, String description){
@@ -23,16 +23,16 @@ public class Card{
     public Card(){}
 
     //restituiscono e settano la cronologia degli stati della Card
-    public List<String> getCardHistory(){
-        List<String> history= new ArrayList<>();
+    public ArrayList<String> getCardHistory(){
+        ArrayList<String> history= new ArrayList<>();
         for (cardStatus status : cardHistory)
             history.add(status.name());
 
         return history;
     }
 
-    public void setCardHistory(List<cardStatus> history){
-        cardHistory=history;
+    public void setCardHistory(ArrayList<cardStatus> history){
+        this.cardHistory=history;
     }
 
     //restituiscono e settano il nome della Card
@@ -45,7 +45,7 @@ public class Card{
     }
 
     //restituiscono e settano lo stato attuale della Card
-    public String getcurrentState()
+    public String getcurrentState(){
         return this.currentState.name();
     }
 
@@ -68,7 +68,7 @@ public class Card{
         List<String> info= new ArrayList<>();
         info.add(this.name);
         info.add(this.description);
-        info.add(this.currentState);
+        info.add(this.currentState.name());
 
         return info;
     }
