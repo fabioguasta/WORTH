@@ -1,5 +1,4 @@
 import Utility.Notification;
-
 import java.rmi.*;
 
 public interface NotifyEventInterface extends Remote{
