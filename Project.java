@@ -81,17 +81,17 @@ public class Project {
     }
 
     //Crea una nuova Card e la aggiunge al progetto
-    public void createCard(String Name, String Description){
+    public void createCard(String name, String Description){
         for(Card c : cards) {
             if(c.getName().equals(Name)) throw new IllegalArgumentException();
         }
-        addCard(new Card(Name, Description));
+        addCard(new Card(name, Description));
     }
 
     //Restituisce una Card a partire dal nome (univoco)
-    public Card getCard (String Name) throws CardNotFoundException(){
+    public Card getCard (String name) throws CardNotFoundException(){
         for(Card card : cards){
-            if(card.getName().equals(Name))
+            if(card.getName().equals(name))
             return card;
         }
         
@@ -99,8 +99,8 @@ public class Project {
     }
 
     //Cambia gli stati di una Card
-    public void changeCardState(String Name, String oldStatus, String newStatus){
-        Card card=getCard(Name);
+    public void changeCardState(String name, String oldStatus, String newStatus){
+        Card card=getCard(name);
 
         if(!card.getcurrentState().equals(oldStatus.toUpperCase())) throw new IllegalArgumentException("Lo stato di partenza non e' quello indicato");
 
@@ -110,8 +110,8 @@ public class Project {
                 } 
                 else{
                     card.changeState("INPROGRESS");
-                    cardsTodo.remove(Name);
-                    cardsInprogress.add(Name);
+                    cardsTodo.remove(name);
+                    cardsInprogress.add(name);
                     break;
                 }
             case "INPROGRESS":
@@ -120,11 +120,11 @@ public class Project {
                 } else {
                     card.changeState(newStatus.toUpperCase());
                     if(newStatus.equalsIgnoreCase("TOBEREVISED")){
-                        cardsInprogress.remove(Name);
-                        cardsToberevised.add(Name);
+                        cardsInprogress.remove(name);
+                        cardsToberevised.add(name);
                     } else{
-                        cardsInprogress.remove(Name);
-                        cardsDone.add(Name);
+                        cardsInprogress.remove(name);
+                        cardsDone.add(name);
                     }
                     break;
                 }
@@ -134,11 +134,11 @@ public class Project {
                 } else{
                     card.changeState(newStatus.toUpperCase());
                     if(newStatus.equalsIgnoreCase("INPROGRESS")){
-                        cardsToberevised.remove(Name);
-                        cardsInprogress.add(Name);
+                        cardsToberevised.remove(name);
+                        cardsInprogress.add(name);
                     } else{
-                        cardsToberevised.remove(Name);
-                        cardsDone.add(Name);
+                        cardsToberevised.remove(name);
+                        cardsDone.add(name);
                     }
                     break;
                 }
