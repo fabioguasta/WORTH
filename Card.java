@@ -1,7 +1,6 @@
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /* Le Card rappresentano i compiti da svolgere per portare a termine un determinato progetto univoco.
  Queste sono identificate da nome, descrizione, stato attuale e cronologia di tutti gli stati. */
@@ -11,7 +10,7 @@ public class Card{
     private String name;
     private String description;
     private cardStatus currentState;
-    private List<cardStatus> cardHistory;
+    private ArrayList<cardStatus> cardHistory;
 
     public Card (String name, String description){
         this.name=name;
