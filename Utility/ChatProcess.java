@@ -9,6 +9,7 @@ import java.util.List;
 
 //Utilizzata dal client per creare thread che rimangano in ascolto di messaggi sulla chat
 public class ChatProcess extends Thread{
+    
     private final MessageQueue queue;
     private final int port;
     private final MulticastSocket multicast;

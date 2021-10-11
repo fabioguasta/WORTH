@@ -1,7 +1,8 @@
 package Utility;
 import java.io.Serializable;
 
-public class Esito implements Serializable{\
+public class Esito implements Serializable{
+    
     final public boolean success;
     final public String msg;
     final public String[] lst;
