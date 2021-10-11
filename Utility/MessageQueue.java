@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageQueue {
+    
     private final List<String> queue;
 
     public MessageQueue(){
