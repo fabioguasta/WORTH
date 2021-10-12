@@ -16,7 +16,7 @@ public class ChatProcess extends Thread{
     private final InetAddress group;
     private final static int BUFFER_SIZE=4096;
 
-    public ChatProcess(String groupAdd, int port){
+    public ChatProcess(String groupAdd, int port)throws IOException{
         this.port=port;
         queue=new MessageQueue();
         this.multicast=new MulticastSocket(port);
@@ -60,7 +60,7 @@ public class ChatProcess extends Thread{
         try {
             multicast.joinGroup(group);
             while (!Thread.interrupted()) {
-                recive();
+                receive();
             }
             multicast.leaveGroup(group);
 

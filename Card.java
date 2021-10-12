@@ -16,7 +16,7 @@ public class Card{
         this.name=name;
         this.description=description;
         this.currentState=cardStatus.TODO;
-        this.cardHistory=add(cardStatus.TODO);
+        this.cardHistory.add(cardStatus.TODO);
     }
 
     public Card(){}
@@ -63,8 +63,8 @@ public class Card{
 
     //restituisce tutte le informazioni relative alla Card
     @JsonIgnore 
-    public List<String> getInformation(){ 
-        List<String> info= new ArrayList<>();
+    public ArrayList<String> getInformation(){ 
+        ArrayList<String> info= new ArrayList<>();
         info.add(this.name);
         info.add(this.description);
         info.add(this.currentState.name());

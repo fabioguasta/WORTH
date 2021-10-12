@@ -44,7 +44,7 @@ public class Utils {
         return ret;
     }
 
-    public static byteToBase64(byte[] b){
+    public static String byteToBase64(byte[] b){
         Encoder e= Base64.getEncoder();
         return new String(e.encode(b), StandardCharsets.ISO_8859_1);
     }

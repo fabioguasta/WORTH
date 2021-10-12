@@ -5,11 +5,11 @@ public class Esito implements Serializable{
     
     final public boolean success;
     final public String msg;
-    final public String[] lst;
+    public String[] list;
 
     public Esito(boolean response){
         this.success=response;
-        this.msg= " ";
+        this.msg= "";
     }
 
     public Esito(boolean response, String message){
@@ -20,7 +20,7 @@ public class Esito implements Serializable{
     public Esito(boolean response, String message, String[] list){
         this.success= response;
         this.msg=message;
-        this.lst=list;
+        this.list=list;
     }
     
 }
