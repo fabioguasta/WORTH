@@ -23,7 +23,7 @@ public class StorageManager {
     public ArrayList<User> restorUsers() throws IOException{
         File file= new File(userFilePath);
         if(file.createNewFile()){
-            mapper.writeValue(file, new ArrayList<User>();
+            mapper.writeValue(file, new ArrayList<User>());
         }
 
         return new ArrayList<>(Arrays.asList(mapper.readValue(file, User[].class)));

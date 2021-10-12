@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class MultipleLoginsException {
+public class MultipleLoginsException extends Exception{
     
     public MultipleLoginsException() {
         super("Sei già loggato con un altro host");

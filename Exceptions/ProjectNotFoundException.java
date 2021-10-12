@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class ProjectNotFoundException {
+public class ProjectNotFoundException extends RuntimeException{
     
     private static final long serialVersionUID = 1L;
 

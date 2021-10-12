@@ -35,7 +35,7 @@ public class Project {
     
     //Aggiunge un membro al progetto
     public void addMember(String utente){
-        if(this.member.contains(utente))
+        if(this.members.contains(utente))
             throw new IllegalArgumentException("Utente gia presente");
         members.add(utente);
     }
@@ -64,7 +64,7 @@ public class Project {
         }
 
         cards.add(card);
-        switch(Card.getcurrentState()){
+        switch(card.getCurrentState()){
             case "TODO":
                 cardsTodo.add(card.getName());
                 break;
@@ -83,13 +83,13 @@ public class Project {
     //Crea una nuova Card e la aggiunge al progetto
     public void createCard(String name, String Description){
         for(Card c : cards) {
-            if(c.getName().equals(Name)) throw new IllegalArgumentException();
+            if(c.getName().equals(name)) throw new IllegalArgumentException();
         }
         addCard(new Card(name, Description));
     }
 
     //Restituisce una Card a partire dal nome (univoco)
-    public Card getCard (String name) throws CardNotFoundException(){
+    public Card getCard (String name) throws CardNotFoundException{
         for(Card card : cards){
             if(card.getName().equals(name))
             return card;
@@ -102,7 +102,7 @@ public class Project {
     public void changeCardState(String name, String oldStatus, String newStatus){
         Card card=getCard(name);
 
-        if(!card.getcurrentState().equals(oldStatus.toUpperCase())) throw new IllegalArgumentException("Lo stato di partenza non e' quello indicato");
+        if(!card.getCurrentState().equals(oldStatus.toUpperCase())) throw new IllegalArgumentException("Lo stato di partenza non e' quello indicato");
 
         switch(oldStatus.toUpperCase()){
             case "TODO":
@@ -116,7 +116,7 @@ public class Project {
                 }
             case "INPROGRESS":
                 if(!newStatus.equalsIgnoreCase("DONE") && !newStatus.equalsIgnoreCase("TOBEREVISED")){
-                    throw new IllegalStateException(oldStatus, newStatus);
+                    throw new IllegalChangeStateException(oldStatus, newStatus);
                 } else {
                     card.changeState(newStatus.toUpperCase());
                     if(newStatus.equalsIgnoreCase("TOBEREVISED")){
@@ -129,7 +129,7 @@ public class Project {
                     break;
                 }
             case "TOBEREVISED":
-                if(!newStatus.equalsIgnoreCase("DONE")) && !newStatus.equalsIgnoreCase("INPROGRESS"){
+                if(!newStatus.equalsIgnoreCase("DONE") && !newStatus.equalsIgnoreCase("INPROGRESS")){
                     throw new IllegalChangeStateException(oldStatus, newStatus);
                 } else{
                     card.changeState(newStatus.toUpperCase());
@@ -151,7 +151,7 @@ public class Project {
     }
 
     public List<String> getCardHistory(String Name){
-        return getCard(Name);
+        return getCard(Name).getCardHistory();
     }
 
     public List<String> getCardInformation(String Name){
@@ -162,7 +162,7 @@ public class Project {
     public List<String> getCardStringList(){
         List<String> l =new ArrayList<>();
         for(Card card :cards){
-            l.add(card.getName()+ " " +card.getcurrentState());
+            l.add(card.getName()+ " " +card.getCurrentState());
         }
         return l;
     }

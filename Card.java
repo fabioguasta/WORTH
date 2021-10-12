@@ -9,13 +9,13 @@ public class Card{
     public enum cardStatus {TODO, INPROGRESS, TOBEREVISED, DONE}
     private String name;
     private String description;
-    private cardStatus currentState;
+    private cardStatus CurrentState;
     private ArrayList<cardStatus> cardHistory;
 
     public Card (String name, String description){
         this.name=name;
         this.description=description;
-        this.currentState=cardStatus.TODO;
+        this.CurrentState=cardStatus.TODO;
         this.cardHistory.add(cardStatus.TODO);
     }
 
@@ -44,12 +44,12 @@ public class Card{
     }
 
     //restituiscono e settano lo stato attuale della Card
-    public String getcurrentState(){
-        return this.currentState.name();
+    public String getCurrentState(){
+        return this.CurrentState.name();
     }
 
-    public void setcurrentState(String currentState){
-        this.currentState=cardStatus.valueOf(currentState.toUpperCase());
+    public void setCurrentState(String CurrentState){
+        this.CurrentState=cardStatus.valueOf(CurrentState.toUpperCase());
     }
 
     //restituiscono e settano la descrizione della Card
@@ -67,7 +67,7 @@ public class Card{
         ArrayList<String> info= new ArrayList<>();
         info.add(this.name);
         info.add(this.description);
-        info.add(this.currentState.name());
+        info.add(this.CurrentState.name());
 
         return info;
     }
@@ -75,7 +75,7 @@ public class Card{
     //cambia lo stato attuale della Card e lo aggiunge alla cronologia degli stati
     @JsonIgnore
     public void changeState(String status){
-        this.currentState= cardStatus.valueOf(status.toUpperCase());
-        this.cardHistory.add(currentState);
+        this.CurrentState= cardStatus.valueOf(status.toUpperCase());
+        this.cardHistory.add(CurrentState);
     }
 }

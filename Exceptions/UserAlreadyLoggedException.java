@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class UserAlreadyLoggedException {
+public class UserAlreadyLoggedException extends Exception{
 
     public UserAlreadyLoggedException() {
         super("Utente già loggato");
