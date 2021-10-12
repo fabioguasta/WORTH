@@ -54,7 +54,7 @@ public class Utils {
         return dec.decode(str);
     }
 
-    public String sha512 (String msg, String saltKey){
+    public static String sha512 (String msg, String saltKey){
         MessageDigest digest=null;
         byte[] salt= new byte[0];
 
