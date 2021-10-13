@@ -55,7 +55,7 @@ public class StorageManager {
 
     public void updateProjects(ArrayList<Project> projects) throws IOException{
         //elimina la cartella e la ricrea vuota
-        File projectsDir= new FIle(projectsDirectory);
+        File projectsDir= new File(projectsDirectory);
         Utils.deleteDir(projectsDir);
         projectsDir.mkdir();
 
@@ -72,7 +72,7 @@ public class StorageManager {
                 mapper.writeValue(cardFile, card);
             }
 
-            File members = newFile(projectPath + "/" + membersFile);
+            File members = new File(projectPath + "/" + membersFile);
             members.createNewFile();
             mapper.writeValue(members, new ArrayList<>(project.getMembers()));
         }
