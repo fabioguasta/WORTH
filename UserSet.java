@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-//Contiene la lista do tutti gli utenti e permette la gestione di essi (login, logout etc)
+//Contiene la lista di tutti gli utenti e permette la gestione di essi (login, logout etc)
 public class UserSet {
     
 }
