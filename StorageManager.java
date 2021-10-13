@@ -29,4 +29,27 @@ public class StorageManager {
         return new ArrayList<>(Arrays.asList(mapper.readValue(file, User[].class)));
     }
 
+    public ArrayList<Project> restoreProjects() throws IOException{
+        ArrayList<Project> projectSet= new ArrayList<>();
+        File dir= new File(projectsDirectory);
+
+        if(!dir.exists())
+            dir.mkdir();
+        for(File projectDir:dir.listFiles()){
+            if(projectDir.isDirectory()){
+                Project project= new Project(projectDir.getName());
+                for(File cardFile: projectDir.listFiles()){
+                    if(cardFile.getName().equals(membersFile)){
+                        project.setMembers(new ArrayList<>(Arrays.asList(mapper.readValue(cardFile , String[].class))));
+                        continue;
+                    }
+                    project.addCard(mapper.readValue(cardFile, Card.class));
+                }
+                projectSet.add(project);
+            }
+        }
+        
+        return projectSet;
+    }
+
 }
