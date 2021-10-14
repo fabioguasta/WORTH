@@ -19,7 +19,7 @@ public class UserSet {
     
     UserSet(StorageManager storage) throws IOException{
         this.storage=storage;
-        this.users=storage.restorUsers();
+        this.users=storage.restoreUsers();
         this.userKeys= new HashMap<>();
     }
 

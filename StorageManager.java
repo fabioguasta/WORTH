@@ -20,7 +20,7 @@ public class StorageManager {
         this.mapper=new ObjectMapper();
     }
 
-    public ArrayList<User> restorUsers() throws IOException{
+    public ArrayList<User> restoreUsers() throws IOException{
         File file= new File(userFilePath);
         if(file.createNewFile()){
             mapper.writeValue(file, new ArrayList<User>());
