@@ -69,4 +69,16 @@ public class UserSet {
             }
         }
     }
+
+    public boolean login(String username, String password, SelectionKey userKey) throws UserNotFoundException, UserAlreadyLoggedException, MultipleLoginsException{
+        User usr=getByUsername(username);
+        if(userKey.containsKey(userKey)) throw new UserAlreadyLoggedException();
+        if(usr.isOnline()) throw new MultipleLoginsException();
+        if(usr.login(password)){
+            userKey.put(userKey,usr);
+            return true
+        }
+
+        return false;
+    }
 }
