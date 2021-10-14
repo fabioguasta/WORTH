@@ -20,6 +20,7 @@ public class StorageManager {
         this.mapper=new ObjectMapper();
     }
 
+    //ricrea l'ArrayList contenente tutti gli utenti presenti in memoria
     public ArrayList<User> restoreUsers() throws IOException{
         File file= new File(userFilePath);
         if(file.createNewFile()){
@@ -29,6 +30,7 @@ public class StorageManager {
         return new ArrayList<>(Arrays.asList(mapper.readValue(file, User[].class)));
     }
 
+    //ricrea l'ArrayList contenente tutti i progetti presenti in memoria
     public ArrayList<Project> restoreProjects() throws IOException{
         ArrayList<Project> projectSet= new ArrayList<>();
         File dir= new File(projectsDirectory);  
@@ -53,6 +55,7 @@ public class StorageManager {
         return projectSet;
     }
 
+    //aggiorna la cartella dei progetti (solitamente usato quando ne vengono aggiunti o eliminati)
     public void updateProjects(ArrayList<Project> projects) throws IOException{
         //elimina la cartella e la ricrea vuota
         File projectsDir= new File(projectsDirectory);
@@ -78,6 +81,7 @@ public class StorageManager {
         }
     }
 
+    //aggiorna il file contenente gli utenti (solitamente usato quando ne vengono aggiunti o eliminati)
     public void updateUsers(ArrayList<User> users) throws IOException{
         File file= new File(userFilePath);
         file.createNewFile();

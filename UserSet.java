@@ -29,6 +29,7 @@ public class UserSet {
         this.userKeys=new HashMap<>();
     }
     
+    //restituisce un utente a partire dall'username
     public synchronized User getByUsername(String username) throws UserNotFoundException{
         for (User usr :users){
             if(usr.getUsername().equals(username)){
@@ -58,7 +59,7 @@ public class UserSet {
         return usersList;
     }
 
-    //
+    //notifica tutti gli utenti 
     public synchronized void notifyAll(ProjectSet projects){
         for(User usr:users){
             try{
