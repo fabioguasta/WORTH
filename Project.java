@@ -81,11 +81,11 @@ public class Project {
     }
 
     //Crea una nuova Card e la aggiunge al progetto
-    public void createCard(String name, String Description){
+    public void createCard(String name, String description){
         for(Card c : cards) {
             if(c.getName().equals(name)) throw new IllegalArgumentException();
         }
-        addCard(new Card(name, Description));
+        addCard(new Card(name, description));
     }
 
     //Restituisce una Card a partire dal nome (univoco)
