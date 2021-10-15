@@ -198,7 +198,7 @@ public class Server extends RemoteObject implements ServerInterface{
         System.out.println("comando richiesto:" + command);
 
         switch (splittedCmd[0].toLowerCase()){
-            
+
             case "login":
                 boolean flag=users.login(splittedCmd[1], splittedCmd[2], key); //indica se il login e' avvenuto con successo
                 if(flag){
@@ -219,7 +219,17 @@ public class Server extends RemoteObject implements ServerInterface{
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
 
-            case "addmember":
+            case "createproject":
+                if(users.isLogged(key)){
+                    projects.addProject(splittedCmd[1]);
+                    projects.addMember(splittedCmd[1], users.getUsernameByKey(key));
+                    notifyUsers();
+                    key.attach(new Esito(true, "Creato progetto: "+splittedCmd[1]));
+                } else
+                    key.attach(new Esito(false, "utente non loggato"));
+                break;
+
+            case "showmembers":
                 if(users.isLogged(key)){
                     Project p=projects.getProjectByName(splittedCmd[1]);
                     if(!p.isMember(users.getUsernameByKey(key))){
@@ -232,6 +242,23 @@ public class Server extends RemoteObject implements ServerInterface{
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
 
+            case "addmember":
+                if(users.isLogged(key)){
+                    Project p= projects.getProjectByName(splittedCmd[1]);
+                    if(!p.isMember(users.getUsernameByKey(key))){
+                        key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
+                    } else{
+                        User newMemb= users.getByUsername(splittedCmd[2]);
+                        p.addMember(newMemb.getUsername());
+                        projects.updateProjects();
+                        key.attach(new Esito(true, "Aggiunto utente "+splittedCmd[2]+ " al progetto "+splittedCmd[1]));
+                        //Notifica l'utente interessato
+                        newMemb.notify(new Notification(users.getUsersList(), projects.getChatList(newMemb.getUsername())));
+                    }
+                } else
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+                
             case "showcards":
                 if((users.isLogged(key))){
                     Project p=projects.getProjectByName(splittedCmd[1]);
@@ -252,7 +279,7 @@ public class Server extends RemoteObject implements ServerInterface{
                     } else{
                         p.createCard(splittedCmd[2], splittedCmd[3]);
                         projects.updateProjects();
-                        key.attach(new Esito(true, "Card "+splittedCmd[2]+ "creata e aggiunta al progetto: "+splittedCmd[1]))
+                        key.attach(new Esito(true, "Card "+splittedCmd[2]+ "creata e aggiunta al progetto: "+splittedCmd[1]));
                     }
                 } else 
                     key.attach(new Esito(false, "Utente non loggato"));
@@ -315,4 +342,36 @@ public class Server extends RemoteObject implements ServerInterface{
                 break;
         }
     }
+
+    public static void main(String[] args){
+
+        try{
+            if (args.length == 1){
+                TCPport=Integer.parseInt(args[0]);
+            }
+            if(args.length==2){
+                TCPport = Integer.parseInt(args[0]);
+                RMIport = Integer.parseInt(args[1]);
+            }
+            if(args.length==3){
+                TCPport = Integer.parseInt(args[0]);
+                RMIport = Integer.parseInt(args[1]);
+                CHAT_PORT= Integer.parseInt(args[2]);
+            }
+        } catch (RuntimeException exc){
+            exc.printStackTrace();
+        }
+
+        try{
+            Server server=new Server();
+            ServerInterface stub= (ServerInterface) UnicastRemoteObject.exportObject(server, 39000);
+            String name= "Server";
+            LocateRegistry.createRegistry(RMIport);
+            Registry reg=LocateRegistry.getRegistry(RMIport);
+            reg.bind(name, stub);
+            server.start();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+}
 }
