@@ -198,12 +198,121 @@ public class Server extends RemoteObject implements ServerInterface{
         System.out.println("comando richiesto:" + command);
 
         switch (splittedCmd[0].toLowerCase()){
+            
             case "login":
-                boolean flag=users.login(splittedCmd[1], splittedCmd[2], key);
+                boolean flag=users.login(splittedCmd[1], splittedCmd[2], key); //indica se il login e' avvenuto con successo
                 if(flag){
                     notifyUsers();
-                    key.attach(new Esito(true, "login avvenuto con successo"))
+                    key.attach(new Esito(true, "Login avvenuto con successo"));
+                } else{
+                    key.attach(new Esito(false, "Password NON corretta"));
                 }
+                break;
+
+            case "listprojects":
+                if(users.isLogged(key)){
+                    projects.addProject(splittedCmd[1]);
+                    projects.addMember(splittedCmd[2], users.getUsernameByKey(key));
+                    notifyUsers();
+                    key.attach(new Esito(true, "Progetto creato: "+ splittedCmd[1]));
+                } else
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+
+            case "addmember":
+                if(users.isLogged(key)){
+                    Project p=projects.getProjectByName(splittedCmd[1]);
+                    if(!p.isMember(users.getUsernameByKey(key))){
+                        key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
+                    } else{
+                        String[] members= p.getMembers().toArray(new String[0]);
+                        key.attach(new Esito(true, "Membri del progetto:", members));
+                    }
+                } else
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+
+            case "showcards":
+                if((users.isLogged(key))){
+                    Project p=projects.getProjectByName(splittedCmd[1]);
+                    if(!p.isMember(users.getUsernameByKey(key))){
+                        key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
+                    } else{
+                        key.attach(new Esito(true, "Card del progetto: ", p.getCardStringList().toArray(new String[0])));
+                    }
+                } else
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+
+            case "addcard":
+                if(users.isLogged(key)){
+                    Project p= projects.getProjectByName(splittedCmd[1]);
+                    if(!p.isMember(users.getUsernameByKey(key))){
+                        key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
+                    } else{
+                        p.createCard(splittedCmd[2], splittedCmd[3]);
+                        projects.updateProjects();
+                        key.attach(new Esito(true, "Card "+splittedCmd[2]+ "creata e aggiunta al progetto: "+splittedCmd[1]))
+                    }
+                } else 
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+
+            case "changecardstate":
+                if(users.isLogged(key)){
+                    Project p= projects.getProjectByName(splittedCmd[1]);
+                    if(!p.isMember(users.getUsernameByKey(key))){
+                        key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
+                    } else{
+                       p.changeCardState(splittedCmd[2], splittedCmd[3], splittedCmd[4]);
+                       projects.updateProjects();
+                       key.attach(new Esito(true, "Cambio di stato della Card "+ splittedCmd[2]+" avvenuto con successo"));
+                       ChatProcess.sendMsg(p.getIPMulticast(), CHAT_PORT, String.format("%s ha cambiato lo stato di %s da %s a %s", users.getUsernameByKey(key),splittedCmd[2],splittedCmd[3],splittedCmd[4]));
+                    }
+                } else
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+
+            case "getcardhistory":
+                if(users.isLogged(key)){
+                    Project p= projects.getProjectByName(splittedCmd[1]);
+                    if(!p.isMember(users.getUsernameByKey(key))){
+                        key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
+                    } else{
+                        key.attach(new Esito(true, "Cronologia card "+splittedCmd[2]+ ": " + p.getCardHistory(splittedCmd[2]).toArray(new String[0])));
+                    }
+                } else
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+
+            case "cancelproject":
+                if(users.isLogged(key)){
+                    Project p= projects.getProjectByName(splittedCmd[1]);
+                    if(!p.isMember(users.getUsernameByKey(key))){
+                        key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
+                    } 
+                    if(!p.isDone()){
+                        key.attach(new Esito(false, "Non e' possibile eliminare un progetto non completato"));
+                    } else{
+                        projects.deleteProject(p);
+                        notifyUsers();
+                        key.attach(new Esito(true, "E' stato eliminato il progetto "+ splittedCmd[1]));
+                    }
+                } else
+                    key.attach(new Esito(false, "Utente non loggato"));
+                break;
+
+            case EXIT_CMD:
+                cancelKey(key);
+                return;
+
+            case "":
+                key.attach(new Esito(true));
+
+
+            default:
+                key.attach(new Esito(false, "Comando non trovato"));
+                break;
         }
     }
 }
