@@ -10,5 +10,5 @@ public interface ServerInterface extends Remote{
     //cancella registrazione per la callback
     void unregisterForCallback(String username) throws RemoteException, UserNotFoundException;
 
-    Esito registrazione(String username, String psswrd) throws RemoteException;
+    Esito register(String username, String psswrd) throws RemoteException;
 }
