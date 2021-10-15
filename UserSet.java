@@ -50,7 +50,7 @@ public class UserSet {
         return true;
     }
 
-    //restituisce la lista di tutti gli utenti
+    //restituisce la lista di tutti gli utenti con relativo stato
     public Map<String, Boolean> getUsersList() {
         Map<String, Boolean> usersList = new HashMap<>();
         for (User usr : users) {
@@ -70,6 +70,7 @@ public class UserSet {
         }
     }
 
+    //effettua login
     public boolean login(String username, String password, SelectionKey userKey) throws UserNotFoundException, UserAlreadyLoggedException, MultipleLoginsException{
         User usr=getByUsername(username);
         if(userKey.containsKey(userKey)) throw new UserAlreadyLoggedException();
@@ -80,5 +81,42 @@ public class UserSet {
         }
 
         return false;
+    }
+
+    //effettua logout
+    public void logout(SelectionKey key){
+        if(!userKeys.containsKey(key))
+            return;
+        User usr=userKeys.get(key);
+        usr.setOnline(false);
+        usr.setClient(null);
+        userKeys.remove(key);
+    }
+
+    public void setClient(String username, NotifyEventInterface clientInterface) throws UserNotFoundException{
+        User user= getByUsername(username);
+        user.setClient(clientInterface);
+    }
+
+    public boolean isLogged(SelectionKey userKey){
+        return userKey.containsKey(userKey);
+    }
+
+    public ArrayList<User> getUsers(){
+        return users;
+    }
+
+    public String getUsernameByKey(SelectionKey key){
+        return userKeys.get(key).getUsername();
+    }
+
+    public String[] getOnlineUsersList() {
+        String[] usersList = new String[userKeys.size()];
+        for (int i = 0; i < users.size(); i++) {
+            User usr = users.get(i);
+            if(usr.isOnline())
+                usersList[i] = usr.getUsername();
+        }
+        return usersList;
     }
 }
