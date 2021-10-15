@@ -15,18 +15,18 @@ public class UserSet {
 
     private final ArrayList<User> users;
     private final StorageManager storage;
-    private final Map<SelectionKey, User> userKeys;
+    private final Map<SelectionKey, User> userKeySet;
     
     UserSet(StorageManager storage) throws IOException{
         this.storage=storage;
         this.users=storage.restoreUsers();
-        this.userKeys= new HashMap<>();
+        this.userKeySet= new HashMap<>();
     }
 
     UserSet(ArrayList<User> users, StorageManager storage){
         this.storage=storage;
         this.users= users;
-        this.userKeys=new HashMap<>();
+        this.userKeySet=new HashMap<>();
     }
     
     //restituisce un utente a partire dall'username
@@ -73,10 +73,10 @@ public class UserSet {
     //effettua login
     public boolean login(String username, String password, SelectionKey userKey) throws UserNotFoundException, UserAlreadyLoggedException, MultipleLoginsException{
         User usr=getByUsername(username);
-        if(userKey.containsKey(userKey)) throw new UserAlreadyLoggedException();
+        if(userKeySet.containsKey(userKey)) throw new UserAlreadyLoggedException();
         if(usr.isOnline()) throw new MultipleLoginsException();
         if(usr.login(password)){
-            userKey.put(userKey,usr);
+            userKeySet.put(userKey,usr);
             return true;
         }
 
@@ -85,12 +85,12 @@ public class UserSet {
 
     //effettua logout
     public void logout(SelectionKey key){
-        if(!userKeys.containsKey(key))
+        if(!userKeySet.containsKey(key))
             return;
-        User usr=userKeys.get(key);
+        User usr=userKeySet.get(key);
         usr.setOnline(false);
         usr.setClient(null);
-        userKeys.remove(key);
+        userKeySet.remove(key);
     }
 
     public void setClient(String username, NotifyEventInterface clientInterface) throws UserNotFoundException{
@@ -99,7 +99,7 @@ public class UserSet {
     }
 
     public boolean isLogged(SelectionKey userKey){
-        return userKey.containsKey(userKey);
+        return userKeySet.containsKey(userKey);
     }
 
     public ArrayList<User> getUsers(){
@@ -107,11 +107,11 @@ public class UserSet {
     }
 
     public String getUsernameByKey(SelectionKey key){
-        return userKeys.get(key).getUsername();
+        return userKeySet.get(key).getUsername();
     }
 
     public String[] getOnlineUsersList() {
-        String[] usersList = new String[userKeys.size()];
+        String[] usersList = new String[userKeySet.size()];
         for (int i = 0; i < users.size(); i++) {
             User usr = users.get(i);
             if(usr.isOnline())
