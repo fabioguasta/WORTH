@@ -41,9 +41,9 @@ public class Server extends RemoteObject implements ServerInterface{
     private final ObjectMapper mapper;
 
     //comando usato dal client per comunicare la fine della comunicazione
-    private final String EXIT_CMD="exit";
+    private final String EXITcmd="exit";
 
-    private static int CHAT_PORT=2000;
+    private static int CHATport=2000;
 
     //crea server
     public Server() throws IOException{
@@ -142,7 +142,7 @@ public class Server extends RemoteObject implements ServerInterface{
                 }catch(CardNotFoundException e){
                     k.attach(new Esito(false, ("Card non trovata")));
                 }
-                if(!cmd.equals(EXIT_CMD))
+                if(!cmd.equals(EXITcmd))
                     k.interestOps(SelectionKey.OP_WRITE);
             }
         }
@@ -258,7 +258,7 @@ public class Server extends RemoteObject implements ServerInterface{
                 } else
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
-                
+
             case "showcards":
                 if((users.isLogged(key))){
                     Project p=projects.getProjectByName(splittedCmd[1]);
@@ -294,7 +294,7 @@ public class Server extends RemoteObject implements ServerInterface{
                        p.changeCardState(splittedCmd[2], splittedCmd[3], splittedCmd[4]);
                        projects.updateProjects();
                        key.attach(new Esito(true, "Cambio di stato della Card "+ splittedCmd[2]+" avvenuto con successo"));
-                       ChatProcess.sendMsg(p.getIPMulticast(), CHAT_PORT, String.format("%s ha cambiato lo stato di %s da %s a %s", users.getUsernameByKey(key),splittedCmd[2],splittedCmd[3],splittedCmd[4]));
+                       ChatProcess.sendMsg(p.getIPMulticast(), CHATport, String.format("%s ha cambiato lo stato di %s da %s a %s", users.getUsernameByKey(key),splittedCmd[2],splittedCmd[3],splittedCmd[4]));
                     }
                 } else
                     key.attach(new Esito(false, "Utente non loggato"));
@@ -329,7 +329,7 @@ public class Server extends RemoteObject implements ServerInterface{
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
 
-            case EXIT_CMD:
+            case EXITcmd:
                 cancelKey(key);
                 return;
 
@@ -356,7 +356,7 @@ public class Server extends RemoteObject implements ServerInterface{
             if(args.length==3){
                 TCPport = Integer.parseInt(args[0]);
                 RMIport = Integer.parseInt(args[1]);
-                CHAT_PORT= Integer.parseInt(args[2]);
+                CHATport= Integer.parseInt(args[2]);
             }
         } catch (RuntimeException exc){
             exc.printStackTrace();
