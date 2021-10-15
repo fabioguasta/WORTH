@@ -70,7 +70,7 @@ public class Server extends RemoteObject implements ServerInterface{
 
     @Override
     public Esito register(String username, String password) throws RemoteException{
-        System.out.println("Username: %s \n Password: %s \n", username, password);
+        System.out.printf("Username: %s \n Password: %s \n", username, password);
 
         try{
             boolean flag= users.register(username, password);
@@ -89,7 +89,121 @@ public class Server extends RemoteObject implements ServerInterface{
     //avvia esecuzione del server
     public void start(){
         try(ServerSocketChannel sChannel= ServerSocketChannel.open()){
-            
+            sChannel.socket().bind(new InetSocketAddress(TCPport));
+            sChannel.configureBlocking(false);
+            Selector sel=Selector.open();
+            sChannel.register(sel, SelectionKey.OP_ACCEPT);
+            System.out.printf("Server in attesa di connessioni sulla porta %d\n", TCPport);
+            while(true){
+                iterateKeys(sel);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void iterateKeys(Selector sel) throws IOException{
+        if(sel.select()==0)
+            return;
+        Set<SelectionKey> selKeys= sel.selectedKeys(); //insieme delle chiavi dei canali pronti
+        Iterator<SelectionKey> iter=selKeys.iterator(); //iteratore insieme selKeys
+        while(iter.hasNext()){
+            SelectionKey k=iter.next();
+            iter.remove();
+            if(k.isAcceptable()){   //caso: ACCETTABLE
+                //accetta la nuova connesione creando un SocketChannel per la comunicazione con il client che l'ha richiesta
+                ServerSocketChannel server=(ServerSocketChannel) k.channel();
+                SocketChannel cChannel= server.accept(); //canale comunicazione
+                cChannel.configureBlocking(false);
+                System.out.println("Server: accettata nuova connessione dal client "+ cChannel.getRemoteAddress());
+                this.registerRead(sel, cChannel);
+            } else if(k.isWritable()){   //caso: WRITABLE
+                this.answerClient(sel,k);
+            } else if(k.isReadable()){   //caso: READABLE
+                String cmd="";
+                try{
+                    cmd=this.readClientMsg(k);
+                    executeCommand(cmd, k);
+                }catch(IOException e){
+                    System.out.println("Disconnessione utente");
+                    cancelKey(k);
+                    continue;
+                }catch (ArrayIndexOutOfBoundsException e){
+                    k.attach(new Esito(false, "Missing arguments"));
+                    k.interestOps(SelectionKey.OP_WRITE);
+                }catch (UserNotFoundException e){
+                    k.attach(new Esito(false, "Utente non trovato"));
+                }catch (ProjectNotFoundException e){
+                    k.attach(new Esito(false, "Progetto non trovato"));
+                }catch(IllegalArgumentException | MultipleLoginsException | UserAlreadyLoggedException e){
+                    k.attach(new Esito(false, e.getMessage()));
+                }catch(IllegalChangeStateException e){
+                    k.attach(new Esito(false, "Cambiamento di stato non permesso"));
+                }catch(CardNotFoundException e){
+                    k.attach(new Esito(false, ("Card non trovata")));
+                }
+                if(!cmd.equals(EXIT_CMD))
+                    k.interestOps(SelectionKey.OP_WRITE);
+            }
+        }
+    }
+
+    private void cancelKey(SelectionKey key) throws IOException{
+        users.logout(key);
+        key.channel().close();
+        key.cancel();
+    }
+
+    /** 
+    * registra interesse all'operazione di READ sul selettore
+    * @param sel      selettore usato dal server
+    * @param cChannel socket channel relativo al client
+    */
+    private void registerRead(Selector sel, SocketChannel cChannel) throws IOException{
+
+        ByteBuffer buff=ByteBuffer.allocate(BUFFER_DIM); //creazione buffer
+        //aggiunge il canale del client al selector con operazione OP_READ
+        //e aggiunge l'array di bytebuffer[lenght, mesage] come attachment
+        cChannel.register(sel, SelectionKey.OP_READ, buff);
+    }
+
+    //scrive il buffer sul canale del client
+    private void answerClient(Selector sel, SelectionKey key)throws IOException{
+        SocketChannel cChannel= (SocketChannel) key.channel();
+        Esito response= (Esito) key.attachment();
+        byte[] res= Utils.serialize(response);
+        ByteBuffer bbEchoAnswer=ByteBuffer.wrap(res);
+        cChannel.write(bbEchoAnswer);
+        System.out.println("Server:"+ response.msg + "inviato al client: " + cChannel.getRemoteAddress());
+        if(!bbEchoAnswer.hasRemaining()){
+            bbEchoAnswer.clear();
+            this.registerRead(sel, cChannel);
+        }
+    }
+
+    private String readClientMsg(SelectionKey key) throws IOException{
+        //accetta una nuova connessione creando un socket channel per la comunicazione con il client che la richiede
+        SocketChannel cChannel= (SocketChannel) key.channel();
+        //recupera l'array di bytebuffer
+        ByteBuffer bb= (ByteBuffer) key.attachment();
+        cChannel.read(bb);
+        bb.flip();
+        return new String(bb.array()).trim();
+    }
+
+    //ESECUZIONE DEI COMANDI
+    private void executeCommand(String command, SelectionKey key) throws IOException,ArrayIndexOutOfBoundsException, UserNotFoundException,
+    MultipleLoginsException, UserAlreadyLoggedException, ProjectNotFoundException, IllegalChangeStateException, IllegalArgumentException{
+        String[] splittedCmd= command.split(" ");
+        System.out.println("comando richiesto:" + command);
+
+        switch (splittedCmd[0].toLowerCase()){
+            case "login":
+                boolean flag=users.login(splittedCmd[1], splittedCmd[2], key);
+                if(flag){
+                    notifyUsers();
+                    key.attach(new Esito(true, "login avvenuto con successo"))
+                }
         }
     }
 }
