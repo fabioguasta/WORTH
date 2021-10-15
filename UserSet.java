@@ -76,7 +76,7 @@ public class UserSet {
         if(usr.isOnline()) throw new MultipleLoginsException();
         if(usr.login(password)){
             userKey.put(userKey,usr);
-            return true
+            return true;
         }
 
         return false;
