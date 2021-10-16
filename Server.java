@@ -34,7 +34,7 @@ public class Server extends RemoteObject implements ServerInterface{
 
     //informazioni relative allo storage
     private final String storageDir= "./storage";
-    private final String userFilePath= storageDir + "/user.json";
+    private final String userFilePath= storageDir + "/users.json";
     private final String projectsDir= storageDir +"/projects";
 
     private final StorageManager storage;
