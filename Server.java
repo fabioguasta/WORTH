@@ -174,7 +174,7 @@ public class Server extends RemoteObject implements ServerInterface{
         byte[] res= Utils.serialize(response);
         ByteBuffer bbEchoAnswer=ByteBuffer.wrap(res);
         cChannel.write(bbEchoAnswer);
-        System.out.println("Server:"+ response.msg + "inviato al client: " + cChannel.getRemoteAddress());
+        System.out.println("Server: "+ response.msg + " inviato al client: " + cChannel.getRemoteAddress());
         if(!bbEchoAnswer.hasRemaining()){
             bbEchoAnswer.clear();
             this.registerRead(sel, cChannel);
