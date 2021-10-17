@@ -33,8 +33,8 @@ public class Utils {
 
     public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException{
         ByteArrayInputStream in= new ByteArrayInputStream(data);
-        ObjectInputStream i= new ObjectInputStream(in);
-        return i.readObject();
+        ObjectInputStream is= new ObjectInputStream(in);
+        return is.readObject();
     }
 
     public static byte[] toByteArray(List<Byte> lst){

@@ -16,6 +16,7 @@ public class Card{
         this.name=name;
         this.description=description;
         this.CurrentState=cardStatus.TODO;
+        cardHistory=new ArrayList<>();
         this.cardHistory.add(cardStatus.TODO);
     }
 

@@ -211,10 +211,7 @@ public class Server extends RemoteObject implements ServerInterface{
 
             case "listprojects":
                 if(users.isLogged(key)){
-                    projects.addProject(splittedCmd[1]);
-                    projects.addMember(splittedCmd[2], users.getUsernameByKey(key));
-                    notifyUsers();
-                    key.attach(new Esito(true, "Progetto creato: "+ splittedCmd[1]));
+                    key.attach(new Esito(true, "Lista dei progetti:\n", projects.listProject(users.getUsernameByKey(key)).toArray(new String[0])));
                 } else
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
@@ -279,7 +276,7 @@ public class Server extends RemoteObject implements ServerInterface{
                     } else{
                         p.createCard(splittedCmd[2], splittedCmd[3]);
                         projects.updateProjects();
-                        key.attach(new Esito(true, "Card "+splittedCmd[2]+ "creata e aggiunta al progetto: "+splittedCmd[1]));
+                        key.attach(new Esito(true, "Card "+splittedCmd[2]+ " creata e aggiunta al progetto: "+splittedCmd[1]));
                     }
                 } else 
                     key.attach(new Esito(false, "Utente non loggato"));
@@ -306,7 +303,7 @@ public class Server extends RemoteObject implements ServerInterface{
                     if(!p.isMember(users.getUsernameByKey(key))){
                         key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
                     } else{
-                        key.attach(new Esito(true, "Cronologia card "+splittedCmd[2]+ ": " + p.getCardHistory(splittedCmd[2]).toArray(new String[0])));
+                        key.attach(new Esito(true, "Cronologia card: " + p.getCardHistory(splittedCmd[2]).toArray(new String[0])));
                     }
                 } else
                     key.attach(new Esito(false, "Utente non loggato"));

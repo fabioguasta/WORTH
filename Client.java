@@ -161,7 +161,7 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
     }
 
     private void help(){
-        System.out.println("************ POSSIBILI COMANDI ************");
+        System.out.println("-------------------- POSSIBILI COMANDI --------------------");
         System.out.println("register [username] [password]      registra un nuovo utente");
         System.out.println("login [username] [password]         effettua login");
         System.out.printf("%s                                  effettua logout \n", this.EXITcmd);
@@ -182,6 +182,7 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
 
         
     }
+
     private void executeCommand(String command) throws IOException,ClassNotFoundException,UserNotFoundException,ArrayIndexOutOfBoundsException{
         String[] splittedCmd = command.split(" ");
         Esito response;
@@ -210,9 +211,6 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
             case "login":
                 response=login(splittedCmd[1], splittedCmd[2]);
                 System.out.printf("< %s\n", response.msg);
-                if(response.success)
-                    for(String text :response.list)
-                        System.out.println(text);
                 break;
 
             case "register":
@@ -232,9 +230,9 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
                 sendCommand(command);
                 response=getResponse();
                 System.out.printf("< %s\n", response.msg);
-                if(response.success)
+                if(response.success){
                     for(String text: response.list)
-                        System.out.println(text);
+                        System.out.println(text);}
                 break;
 
             case "":

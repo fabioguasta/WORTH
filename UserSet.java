@@ -79,7 +79,6 @@ public class UserSet {
             userKeySet.put(userKey,usr);
             return true;
         }
-
         return false;
     }
 
