@@ -230,9 +230,9 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
                 sendCommand(command);
                 response=getResponse();
                 System.out.printf("< %s\n", response.msg);
-                if(response.success){
+                if(response.success)
                     for(String text: response.list)
-                        System.out.println(text);}
+                        System.out.println(text);
                 break;
 
             case "":
