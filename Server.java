@@ -211,7 +211,7 @@ public class Server extends RemoteObject implements ServerInterface{
 
             case "listprojects":
                 if(users.isLogged(key)){
-                    key.attach(new Esito(true, "Lista dei progetti:\n", projects.listProject(users.getUsernameByKey(key)).toArray(new String[0])));
+                    key.attach(new Esito(true, "Lista dei progetti:", projects.listProject(users.getUsernameByKey(key)).toArray(new String[0])));
                 } else
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
