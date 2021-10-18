@@ -303,7 +303,7 @@ public class Server extends RemoteObject implements ServerInterface{
                     if(!p.isMember(users.getUsernameByKey(key))){
                         key.attach(new Esito(false, "Non fai parte dei membri del progetto"));
                     } else{
-                        key.attach(new Esito(true, "Cronologia card: " + p.getCardHistory(splittedCmd[2]).toArray(new String[0])));
+                        key.attach(new Esito(true, "Cronologia card: ", p.getCardHistory(splittedCmd[2]).toArray(new String[0])));
                     }
                 } else
                     key.attach(new Esito(false, "Utente non loggato"));

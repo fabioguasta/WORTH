@@ -100,8 +100,9 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
             client= SocketChannel.open(new InetSocketAddress(serverAdd, TCPport));
             BufferedReader consoleReader= new BufferedReader(new InputStreamReader(System.in));
             System.out.println("CLIENT CONNESSO");
-            System.out.println("Digitare "+ this.EXITcmd + " per uscire");
+            System.out.println("------------------------------------------------------------");
             System.out.println("Digitare help per mostrare la lista dei comandi disponibili");
+            System.out.println("Digitare "+ this.EXITcmd + " per uscire");
 
             while(!this.exitFlag){
                 System.out.print("> ");
@@ -231,8 +232,8 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
                 response=getResponse();
                 System.out.printf("< %s\n", response.msg);
                 if(response.success)
-                    for(String text: response.list)
-                        System.out.println(text);
+                    for(String text: response.list){
+                        System.out.println(text);}
                 break;
 
             case "":
