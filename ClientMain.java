@@ -21,7 +21,7 @@ import Exceptions.UserNotFoundException;
 //Classe client che legge i comandi e li inoltra al server
 public class ClientMain extends UnicastRemoteObject implements NotifyEventInterface{
     
-    private static final long serialVersionUID = 5466266430079395311L;
+    private static final long serialVersionUID = 467266430079395311L;
     private final ServerInterface server;
     private String username;
     private String password;
@@ -30,9 +30,9 @@ public class ClientMain extends UnicastRemoteObject implements NotifyEventInterf
     private Map<String, Boolean> users;
     private static String serverAdd= "127.0.0.1";
     private final int BUFFER_DIM=1024;
-    private static int RMIport= 5000;
-    private static int TCPport=1919;
-    private static int CHATport= 2000;
+    private static int RMIport= 1000;
+    private static int TCPport=1001;
+    private static int CHATport= 1002;
     private final String EXITcmd= "exit";
     private SocketChannel client;
     private boolean exitFlag;

@@ -21,7 +21,7 @@ import java.util.*;
 //Classe server che esegue le richieste effettuate dai client
 public class ServerMain extends RemoteObject implements ServerInterface{
 
-    private static final long serialVersionUID=150859790584022983L;
+    private static final long serialVersionUID=158859790584022983L;
     private final UserSet users;
     private final ProjectSet projects;
 
@@ -29,8 +29,8 @@ public class ServerMain extends RemoteObject implements ServerInterface{
     private final int BUFFER_DIM=1024;
 
     //porta su cui aprire il listening socket
-    private static int RMIport=5000;
-    private static int TCPport=1919;
+    private static int RMIport=1000;
+    private static int TCPport=1001;
 
     //informazioni relative allo storage
     private final String storageDir= "./storage";
@@ -43,7 +43,7 @@ public class ServerMain extends RemoteObject implements ServerInterface{
     //comando usato dal client per comunicare la fine della comunicazione
     private final String EXITcmd="exit";
 
-    private static int CHATport=2000;
+    private static int CHATport=1002;
 
     //crea server
     public ServerMain() throws IOException{
