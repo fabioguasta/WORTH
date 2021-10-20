@@ -29,8 +29,8 @@ public class ServerMain extends RemoteObject implements ServerInterface{
     private final int BUFFER_DIM=1024;
 
     //porta su cui aprire il listening socket
-    private static int RMIport=1000;
-    private static int TCPport=1001;
+    private static int RMIport=390;
+    private static int TCPport=391;
 
     //informazioni relative allo storage
     private final String storageDir= "./storage";
@@ -43,7 +43,7 @@ public class ServerMain extends RemoteObject implements ServerInterface{
     //comando usato dal client per comunicare la fine della comunicazione
     private final String EXITcmd="exit";
 
-    private static int CHATport=1002;
+    private static int CHATport=392;
 
     //crea server
     public ServerMain() throws IOException{

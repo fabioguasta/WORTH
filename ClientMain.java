@@ -30,9 +30,9 @@ public class ClientMain extends UnicastRemoteObject implements NotifyEventInterf
     private Map<String, Boolean> users;
     private static String serverAdd= "127.0.0.1";
     private final int BUFFER_DIM=1024;
-    private static int RMIport= 1000;
-    private static int TCPport=1001;
-    private static int CHATport= 1002;
+    private static int RMIport= 390;
+    private static int TCPport=391;
+    private static int CHATport= 392;
     private final String EXITcmd= "exit";
     private SocketChannel client;
     private boolean exitFlag;
