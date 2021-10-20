@@ -19,7 +19,7 @@ import Utility.ChatProcess;
 import Exceptions.UserNotFoundException;
 
 //Classe client che legge i comandi e li inoltra al server
-public class Client extends UnicastRemoteObject implements NotifyEventInterface{
+public class ClientMain extends UnicastRemoteObject implements NotifyEventInterface{
     
     private static final long serialVersionUID = 5466266430079395311L;
     private final ServerInterface server;
@@ -38,7 +38,7 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
     private boolean exitFlag;
 
     //crea un nuovo callback client
-    public Client(ServerInterface server) throws RemoteException{
+    public ClientMain(ServerInterface server) throws RemoteException{
         super();
         this.users= new HashMap<>();
         this.chatList= new HashMap<>();
@@ -174,7 +174,7 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
         System.out.println("showcards [project name]            mostra le card relative ad un progetto");
         System.out.println("showcard [project name] [card name] mostra le informazioni relative ad una card");
         System.out.println("addcard [project name] [card name] [card description] aggiunge una nuova card al progetto");
-        System.out.println("changecardstate [project name] [card name] [old state] [new state] cambia lo stato di una card");
+        System.out.println("movecard [project name] [card name] [old state] [new state] cambia lo stato di una card");
         System.out.println("getcardhistory [project name] [card name] mostra la cronologia di una card");
         System.out.println("listusers                           mostra la lista di tutti gli utenti registrati");
         System.out.println("listonlineusers                     mostra tutti gli utenti attualmente online");
@@ -289,7 +289,7 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
     }
 
     public static void main(String[] args) throws RemoteException {
-        Client clientMain;
+        ClientMain clientMain;
 
         try {
             if (args.length == 1) {
@@ -323,7 +323,7 @@ public class Client extends UnicastRemoteObject implements NotifyEventInterface{
             Registry registry = LocateRegistry.getRegistry(RMIport);
             String name = "Server";
             ServerInterface server = (ServerInterface) registry.lookup(name);
-            clientMain = new Client(server);
+            clientMain = new ClientMain(server);
             clientMain.start();
         } catch (Exception e) {
             e.printStackTrace();

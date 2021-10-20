@@ -19,7 +19,7 @@ import java.rmi.server.*;
 import java.util.*;
 
 //Classe server che esegue le richieste effettuate dai client
-public class Server extends RemoteObject implements ServerInterface{
+public class ServerMain extends RemoteObject implements ServerInterface{
 
     private static final long serialVersionUID=150859790584022983L;
     private final UserSet users;
@@ -46,7 +46,7 @@ public class Server extends RemoteObject implements ServerInterface{
     private static int CHATport=2000;
 
     //crea server
-    public Server() throws IOException{
+    public ServerMain() throws IOException{
         super();
         mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -282,7 +282,7 @@ public class Server extends RemoteObject implements ServerInterface{
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
 
-            case "changecardstate":
+            case "movecard":
                 if(users.isLogged(key)){
                     Project p= projects.getProjectByName(splittedCmd[1]);
                     if(!p.isMember(users.getUsernameByKey(key))){
@@ -360,7 +360,7 @@ public class Server extends RemoteObject implements ServerInterface{
         }
 
         try{
-            Server server=new Server();
+            ServerMain server=new ServerMain();
             ServerInterface stub= (ServerInterface) UnicastRemoteObject.exportObject(server, 39000);
             String name= "Server";
             LocateRegistry.createRegistry(RMIport);
