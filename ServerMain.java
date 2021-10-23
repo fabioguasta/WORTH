@@ -296,6 +296,18 @@ public class ServerMain extends RemoteObject implements ServerInterface{
                 } else
                     key.attach(new Esito(false, "Utente non loggato"));
                 break;
+                
+            case "showcard":
+            if (users.isLogged(key)) {
+                Project project = projects.getProjectByName(splittedCmd[1]);
+                if (!project.isMember(users.getUsernameByKey(key))) {
+                    key.attach(new Esito(false, "Non sei membro del progetto"));
+                } else {
+                    key.attach(new Esito(true, "Info card:", project.getCardInformation(splittedCmd[2]).toArray(new String[0])));
+                }
+            } else
+                key.attach(new Esito(false, "Non sei loggato"));
+            break;
 
             case "getcardhistory":
                 if(users.isLogged(key)){
