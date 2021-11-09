@@ -18,6 +18,12 @@ public class StorageManager {
         this.userFilePath=filePath;
         this.projectsDirectory=projectsDir;
         this.mapper=new ObjectMapper();
+        
+        //aggiunto rispetto alla consegna vecchio progetto (non permetteva avvio server se la cartella storage non era già esistente)
+        File storage = new File(storageDir);
+        if (!storage.exists()) {
+            storage.mkdir();
+        }
     }
 
     //ricrea l'ArrayList contenente tutti gli utenti presenti in memoria

@@ -1,0 +1,4 @@
+javac -classpath ".\out\*;.\lib\*" -d .\out\'@sources.txt
+java -classpath ".\out\;.\lib\*" ServerMain
+java -classpath ".\out\;.\lib\*" ClientMain
+
