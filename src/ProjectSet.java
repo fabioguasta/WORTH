@@ -36,7 +36,21 @@ public class ProjectSet {
                 throw new IllegalArgumentException("Progetto con nome scelto gia presente");
             }
         }
-        projects.add(new Project(name));
+
+        //verifica IP multicast non già in uso
+        boolean flag=false;
+        while(!flag){
+            Project newProj=new Project(name);
+            boolean condition=true;
+            for(Project p : projects){
+                if (newProj.getIPMulticast().equals(p.getIPMulticast()))
+                    condition=false; 
+            }
+            if(condition){
+                projects.add(newProj);
+                flag=true;
+            }
+        }
         storage.updateProjects(projects);
     }
 
