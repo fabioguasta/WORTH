@@ -16,8 +16,9 @@ public class Project {
     private final List<String> cardsDone;
 
     private List<String> members;
-    private final String IPMulticast;
+    private String IPMulticast;
 
+    
     public Project(String Name){
         this.name=Name;
         this.cards=new ArrayList<>();
@@ -27,6 +28,35 @@ public class Project {
         this.cardsDone= new ArrayList<>();
         this.IPMulticast= Utils.randomMulticastipv4();
         this.members= new ArrayList<>();
+    }
+
+    public Project(String Name, ArrayList<Project> projects){
+        this.name=Name;
+        this.cards=new ArrayList<>();
+        this.cardsTodo= new ArrayList<>();
+        this.cardsInprogress= new ArrayList<>();
+        this.cardsToberevised= new ArrayList<>();
+        this.cardsDone= new ArrayList<>();
+        this.members= new ArrayList<>();
+
+        boolean flag=true;
+        String ip;
+        while(flag){
+            ip=Utils.randomMulticastipv4();
+            boolean flag2=true;
+            while(flag2==true){
+                for(Project p : projects){
+                    ip=Utils.randomMulticastipv4();
+                    if (ip.equals(p.getIPMulticast()))
+                        flag2=false;
+                }
+                //se nessun progetto ha quell'indirizzo IP allora lo assegno, altrimenti ne creo uno nuovo e riprovo
+                if(flag2==true){
+                    this.IPMulticast=ip;
+                    flag=false;
+                }
+            }
+        }
     }
 
     public String getName(){

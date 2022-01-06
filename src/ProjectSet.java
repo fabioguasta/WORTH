@@ -31,27 +31,16 @@ public class ProjectSet {
 
     //aggiunge un progetto 
     public void addProject(String name) throws IOException, IllegalArgumentException{
+
         for(Project p: projects){
             if(p.getName().equals(name)){
                 throw new IllegalArgumentException("Progetto con nome scelto gia presente");
             }
         }
-
-        //verifica IP multicast non già in uso
-        boolean flag=false;
-        while(!flag){
-            Project newProj=new Project(name);
-            boolean condition=true;
-            for(Project p : projects){
-                if (newProj.getIPMulticast().equals(p.getIPMulticast()))
-                    condition=false; 
-            }
-            if(condition){
-                projects.add(newProj);
-                flag=true;
-            }
-        }
+        Project newProj=new Project(name, projects);
+        projects.add(newProj);
         storage.updateProjects(projects);
+        
     }
 
     //elimina un progetto a partire dal nome
