@@ -41,21 +41,21 @@ public class Project {
 
         boolean flag=true;
         String ip;
-        while(flag){
+        while(flag) {
             ip=Utils.randomMulticastipv4();
-            boolean flag2=true;
-            while(flag2==true){
-                for(Project p : projects){
-                    ip=Utils.randomMulticastipv4();
-                    if (ip.equals(p.getIPMulticast()))
-                        flag2=false;
-                }
-                //se nessun progetto ha quell'indirizzo IP allora lo assegno, altrimenti ne creo uno nuovo e riprovo
-                if(flag2==true){
-                    this.IPMulticast=ip;
-                    flag=false;
+            boolean trovato = false;
+            for (Project p : projects) {
+                if (ip.equals(p.getIPMulticast())) {
+                    trovato = true;
+                    break;
                 }
             }
+            //se nessun progetto ha quell'indirizzo IP allora lo assegno, altrimenti ne creo uno nuovo e riprovo
+            if(!trovato){
+                this.IPMulticast=ip;
+                flag=false;
+            }
+  
         }
     }
 
