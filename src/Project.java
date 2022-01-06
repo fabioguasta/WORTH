@@ -17,20 +17,10 @@ public class Project {
 
     private List<String> members;
     private String IPMulticast;
-
     
-    public Project(String Name){
-        this.name=Name;
-        this.cards=new ArrayList<>();
-        this.cardsTodo= new ArrayList<>();
-        this.cardsInprogress= new ArrayList<>();
-        this.cardsToberevised= new ArrayList<>();
-        this.cardsDone= new ArrayList<>();
-        this.IPMulticast= Utils.randomMulticastipv4();
-        this.members= new ArrayList<>();
-    }
+    private static final List<Project> PROJECT_CREATED = new ArrayList<>():
 
-    public Project(String Name, ArrayList<Project> projects){
+    public Project(String Name) {
         this.name=Name;
         this.cards=new ArrayList<>();
         this.cardsTodo= new ArrayList<>();
@@ -44,7 +34,7 @@ public class Project {
         while(flag) {
             ip=Utils.randomMulticastipv4();
             boolean trovato = false;
-            for (Project p : projects) {
+            for (Project p : PROJECT_CREATED) {
                 if (ip.equals(p.getIPMulticast())) {
                     trovato = true;
                     break;
@@ -57,6 +47,8 @@ public class Project {
             }
   
         }
+        
+        PROJECT_CREATED.add(this);
     }
 
     public String getName(){
