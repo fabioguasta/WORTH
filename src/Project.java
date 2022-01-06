@@ -18,7 +18,7 @@ public class Project {
     private List<String> members;
     private String IPMulticast;
     
-    private static final List<Project> PROJECT_CREATED = new ArrayList<>():
+    private static final List<Project> PROJECT_CREATED = new ArrayList<>();
 
     public Project(String Name) {
         this.name=Name;

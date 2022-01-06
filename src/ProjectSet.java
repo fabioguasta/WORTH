@@ -37,7 +37,7 @@ public class ProjectSet {
                 throw new IllegalArgumentException("Progetto con nome scelto gia presente");
             }
         }
-        Project newProj=new Project(name, projects);
+        Project newProj=new Project(name);
         projects.add(newProj);
         storage.updateProjects(projects);
         
