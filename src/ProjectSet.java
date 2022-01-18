@@ -29,7 +29,7 @@ public class ProjectSet {
         throw new ProjectNotFoundException();
     }
 
-    //aggiunge un progetto 
+    //crea un nuovo progetto con nome 'name'
     public void addProject(String name) throws IOException, IllegalArgumentException{
 
         for(Project p: projects){
@@ -51,27 +51,32 @@ public class ProjectSet {
     }
 
     //elimina un progetto prendendo come argomento un oggetto di tipo Project
-    public void deleteProject(Project project)throws IOException{
+    public void deleteProject(Project project) throws IOException{
         projects.remove(project);
         storage.updateProjects(projects);
     }
 
+    //crea una nuova card per un progetto
     public void createCard(String pName, String cName, String desc)throws IOException{
         getProjectByName(pName).createCard(cName, desc);
     }
     
-    public List<Card> getCards(String pName) {//restituisce card di un progetto
+    //restituisce lista delle card di un progetto
+    public List<Card> getCards(String pName) {
         return getProjectByName(pName).getAllCards();
     }
 
+    //permette di sapere se un progetto e' finito o meno
     public boolean isDone(String pName) {
         return getProjectByName(pName).isDone();
     }
 
+    //restituisce la cronologia di una card
     public List<String> getCardHistory(String pName, String cardName) {
         return getProjectByName(pName).getCardHistory(cardName);
     }
 
+    //restituisce le informazioni di una card
     public List<String> getCardInfo(String pName, String cardName) {
         return getProjectByName(pName).getCardInformation(cardName);
     }
@@ -83,6 +88,7 @@ public class ProjectSet {
         storage.updateProjects(projects);
     }
 
+    //permette di sapere se un utente e' membro di un progetto
     public boolean isMember(String pName, String user){
         return getProjectByName(pName).isMember(user);
     }
@@ -109,10 +115,12 @@ public class ProjectSet {
         return pList;
     }
 
+    //metodo di supporto che permette di aggiornare i progetti attraverso lo StorageManager
     public void updateProjects() throws IOException {
         storage.updateProjects(projects);
     }
 
+    //metodo che restituisce la lista dei messaggi per un utente dai relativi progetti di cui fa parte
     public Map<String,String> getChatList(String user){
         Map<String,String> chatList= new HashMap<>();
         for (Project p: projects){

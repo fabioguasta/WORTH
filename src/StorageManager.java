@@ -9,7 +9,7 @@ public class StorageManager {
     
     private final ObjectMapper mapper;
     private final String storageDirectory;  //path cartella storage
-    private final String userFilePath;
+    private final String userFilePath;      //path del file contenente la lista di tutti gli utenti dell'applicazione
     private final String projectsDirectory; //path cartella contenente i progetti
     private final String membersFile="member.json";
 
