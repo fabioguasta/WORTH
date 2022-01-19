@@ -11,7 +11,7 @@ public class User {
     private String username;
     private String password;
     private String saltKey;
-    private NotifyEventInterface clientInterface;
+    private NotifyEventInterface clientInterface; //interfaccia remota del client
     private boolean on; //rappresenta lo stato dell'utente
 
     User(){}
@@ -27,6 +27,7 @@ public class User {
         this.password=Utils.sha512(password, this.saltKey);
     }
 
+    //utilizza l’interfaccia remota del client per mandare una notifica tramite RMI callback
     @JsonIgnore
     public synchronized void notify(Notification notification) throws RemoteException{
         if(this.clientInterface==null) return;
@@ -49,6 +50,7 @@ public class User {
         return false;
     }
 
+    //restituiscono e settano lo stato di un utente
     @JsonIgnore
     public boolean isOnline(){
         return on;
@@ -59,27 +61,31 @@ public class User {
         this.on=online;
     }
 
+    //restituiscono e settano l'username di un utente
     public String getUsername(){
         return username;
-    }
-
-    public String getPassword(){
-        return password;
     }
 
     public void setUsername(String username){
         this.username=username;
     }
 
-    public String getSaltKey(){
-        return saltKey;
+    //restituiscono e settano la password di un utente
+    public String getPassword(){
+        return password;
     }
 
     public void setPassword(String psw){
         this.password=psw;
     }
 
+    //restituiscono e settano la Key di un utente
+    public String getSaltKey(){
+        return saltKey;
+    }
+
     public void setSaltKey(String saltKey){
         this.saltKey=saltKey;
     } 
+
 }

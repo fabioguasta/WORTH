@@ -120,7 +120,7 @@ public class ProjectSet {
         storage.updateProjects(projects);
     }
 
-    //metodo che restituisce la lista dei messaggi per un utente dai relativi progetti di cui fa parte
+    
     public Map<String,String> getChatList(String user){
         Map<String,String> chatList= new HashMap<>();
         for (Project p: projects){
