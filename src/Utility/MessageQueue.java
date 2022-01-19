@@ -11,8 +11,8 @@ public class MessageQueue {
         queue=new ArrayList<>();
     }
 
-    public synchronized void put(String s){
-        queue.add(s);
+    public synchronized void put(String message){
+        queue.add(message);
     }
 
     public synchronized List<String> getAndClear(){

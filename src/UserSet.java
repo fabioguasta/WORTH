@@ -109,6 +109,7 @@ public class UserSet {
         return userKeySet.get(key).getUsername();
     }
 
+    //restituisce la lista degli utenti attualmente online
     public String[] getOnlineUsersList() {
         String[] usersList = new String[userKeySet.size()];
         for (int i = 0; i < users.size(); i++) {
