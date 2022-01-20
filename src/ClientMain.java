@@ -116,7 +116,7 @@ public class ClientMain extends UnicastRemoteObject implements NotifyEventInterf
                 } catch(UserNotFoundException e){   
                     System.out.println(e.getMessage());
                 } catch( ConnectException e){
-                    System.out.println("server non raggiungibile, digita " + this.EXITcmd +"per uscire");
+                    System.out.println("server non raggiungibile, digita " + this.EXITcmd +" per uscire");
                 }
             }
             System.out.println("CLIENT CHIUSO");
@@ -182,8 +182,6 @@ public class ClientMain extends UnicastRemoteObject implements NotifyEventInterf
         System.out.println("listonlineusers                     mostra tutti gli utenti attualmente online");
         System.out.println("readchat [project name]             mostra i messaggi della chat di un progetto");
         System.out.println("sendchatmsg [project name] \"message\" manda un messaggio nella chat in un progetto (il messaggio deve esser compreso tra \")");
-
-        
     }
 
     private void executeCommand(String command) throws IOException,ClassNotFoundException,UserNotFoundException,ArrayIndexOutOfBoundsException{
