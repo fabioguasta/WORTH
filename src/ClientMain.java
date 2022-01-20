@@ -68,12 +68,14 @@ public class ClientMain extends UnicastRemoteObject implements NotifyEventInterf
             login(username, password);
         return response;
     }
+
     private void sendCommand(String command) throws IOException{
         ByteBuffer readBuff=ByteBuffer.wrap(command.getBytes());    //creo msg da inviare al server
         client.write(readBuff);
         readBuff.clear();
     }
 
+    //riceve esito dell'operazione eseguita dal server
     private Esito getResponse() throws IOException, ClassNotFoundException{
         ByteBuffer reply =ByteBuffer.allocate(BUFFER_DIM);
         client.read(reply);
