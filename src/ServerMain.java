@@ -148,6 +148,7 @@ public class ServerMain extends RemoteObject implements ServerInterface{
         }
     }
 
+    //richiede la cancellazione della registrazione della key dal canale e relativo selettore dopo aver chiuso il canale
     private void cancelKey(SelectionKey key) throws IOException{
         users.logout(key);
         key.channel().close();
