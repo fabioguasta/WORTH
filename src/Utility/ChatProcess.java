@@ -27,10 +27,20 @@ public class ChatProcess extends Thread{
         return queue.getAndClear();
     }
 
+    //metodo utilizzato dai client
     public void sendMessage(String msg) throws NullPointerException, IOException{
         if(msg==null) throw new NullPointerException();
         byte[] buffer=msg.getBytes();
         DatagramPacket datagram = new DatagramPacket(buffer, buffer.length, this.group, this.port);
+        multicast.send(datagram);
+    }
+
+    //metodo statico utilizzato dal server
+    public static void sendMsg(String groupAddress, int port, String message) throws IOException{
+        InetAddress group=InetAddress.getByName(groupAddress);
+        MulticastSocket multicast= new MulticastSocket(port);
+        byte[] buffer= message.getBytes();
+        DatagramPacket datagram= new DatagramPacket(buffer, buffer.length, group, port);
         multicast.send(datagram);
     }
 
@@ -47,13 +57,7 @@ public class ChatProcess extends Thread{
         queue.put(message);
     }
 
-    public static void sendMsg(String groupAddress, int port, String message) throws IOException{
-        InetAddress group=InetAddress.getByName(groupAddress);
-        MulticastSocket multicast= new MulticastSocket(port);
-        byte[] buffer= message.getBytes();
-        DatagramPacket datagram= new DatagramPacket(buffer, buffer.length, group, port);
-        multicast.send(datagram);
-    }
+   
 
     @Override
     public void run() {
