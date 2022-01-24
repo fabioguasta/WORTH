@@ -328,9 +328,11 @@ public class ServerMain extends RemoteObject implements ServerInterface{
                 break;
 
             case EXITcmd:
+                String utentelogout;
+                utentelogout=users.getUsernameByKey(key);
                 cancelKey(key);
                 notifyUsers();
-                System.out.println("Client chiuso.");
+                System.out.println("Utente "+ utentelogout +" disconnesso.");
                 return;
 
             case "":
