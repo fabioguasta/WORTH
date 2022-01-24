@@ -330,7 +330,7 @@ public class ServerMain extends RemoteObject implements ServerInterface{
             case EXITcmd:
                 cancelKey(key);
                 notifyUsers();
-                key.attach(new Esito(true, "Logout avvenuto con successo"));
+                System.out.println("Client chiuso.");
                 return;
 
             case "":
