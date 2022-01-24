@@ -1,4 +1,5 @@
-Javac -cp .:../lib/* *.java
-Java -cp .:../lib/* ServerMain
-Javac -cp .:../lib/* ClientMain
+javac -cp .:../lib/* *.java
+java -cp .:../lib/* ServerMain
+javac -cp .:../lib/* ClientMain
 
+posizionarsi prima all'interno della cartella src
