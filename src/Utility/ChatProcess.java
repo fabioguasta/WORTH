@@ -58,7 +58,6 @@ public class ChatProcess extends Thread{
     }
 
    
-
     @Override
     public void run() {
         try {
