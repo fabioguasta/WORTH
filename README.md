@@ -39,7 +39,7 @@ Ad ogni progetto è associata una chat di gruppo, e tutti i membri di quel proge
 effettuato il login), possono ricevere e inviare i messaggi sulla chat. Sulla chat il sistema invia inoltre
 automaticamente le notifiche di eventi legati allo spostamento di una card del progetto da una lista
 all'altra.  
-![fig1](/img/fig1.png)
+
 
 Un utente registrato e dopo login eseguita con successo ha i permessi per:
 * recuperare la lista di tutti gli utenti registrati al servizio;
