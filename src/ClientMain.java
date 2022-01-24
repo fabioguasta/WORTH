@@ -103,8 +103,8 @@ public class ClientMain extends UnicastRemoteObject implements NotifyEventInterf
             BufferedReader consoleReader= new BufferedReader(new InputStreamReader(System.in));
             System.out.println("CLIENT CONNESSO");
             System.out.println("------------------------------------------------------------");
-            System.out.println("Digitare help per mostrare la lista dei comandi disponibili");
-            System.out.println("Digitare "+ this.EXITcmd + " per uscire");
+            System.out.println("Digitare 'help' per mostrare la lista dei comandi disponibili");
+            System.out.println("Digitare '"+ this.EXITcmd + "' per uscire");
 
             while(!this.exitFlag){
                 System.out.print("> ");

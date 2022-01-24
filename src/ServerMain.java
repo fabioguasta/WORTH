@@ -70,7 +70,7 @@ public class ServerMain extends RemoteObject implements ServerInterface{
 
     @Override
     public Esito register(String username, String password) throws RemoteException{
-        System.out.printf("Username: %s \n Password: %s \n", username, password);
+        System.out.printf("Username: %s \nPassword: %s \n", username, password);
 
         try{
             boolean flag= users.register(username, password);
@@ -196,7 +196,7 @@ public class ServerMain extends RemoteObject implements ServerInterface{
     private void executeCommand(String command, SelectionKey key) throws IOException,ArrayIndexOutOfBoundsException, UserNotFoundException,
     MultipleLoginsException, UserAlreadyLoggedException, ProjectNotFoundException, IllegalChangeStateException, IllegalArgumentException{
         String[] splittedCmd= command.split(" ");
-        System.out.println("comando richiesto:" + command);
+        System.out.println("Comando richiesto: " + command);
 
         switch (splittedCmd[0].toLowerCase()){
 
@@ -329,6 +329,8 @@ public class ServerMain extends RemoteObject implements ServerInterface{
 
             case EXITcmd:
                 cancelKey(key);
+                notifyUsers();
+                key.attach(new Esito(true, "Logout avvenuto con successo"));
                 return;
 
             case "":
