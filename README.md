@@ -174,10 +174,8 @@ ogni card del progetto (sul file sono accodati gli eventi di spostamento relativ
 delle chat non devono essere persistiti. Quando il server viene riavviato tali informazioni sono
 utilizzate per ricostruire lo stato del sistema.
 
-Per esecuzione:
+Per __esecuzione__ posizionarsi all'interno della cartella *src* ed eseguire i seguenti comandi:  
+javac -cp .:../lib/* *.java  
+java -cp .:../lib/* ServerMain  
+javac -cp .:../lib/* ClientMain  
 
-javac -cp .:../lib/* *.java
-java -cp .:../lib/* ServerMain
-javac -cp .:../lib/* ClientMain
-
-posizionarsi prima all'interno della cartella src
