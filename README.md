@@ -173,3 +173,11 @@ persistente sul file system come descritto di seguito: una directory per ogni pr
 ogni card del progetto (sul file sono accodati gli eventi di spostamento relativi alla card). I messaggi
 delle chat non devono essere persistiti. Quando il server viene riavviato tali informazioni sono
 utilizzate per ricostruire lo stato del sistema.
+
+Per esecuzione:
+
+javac -cp .:../lib/* *.java
+java -cp .:../lib/* ServerMain
+javac -cp .:../lib/* ClientMain
+
+posizionarsi prima all'interno della cartella src
