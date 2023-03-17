@@ -176,6 +176,6 @@ utilizzate per ricostruire lo stato del sistema.
 
 ### Esecuzione
 Per __esecuzione__ posizionarsi all'interno della cartella *src* ed eseguire i seguenti comandi:  
-''' javac -cp .:../lib/* *.java  '''  
-''' java -cp .:../lib/* ServerMain  '''  
-''' javac -cp .:../lib/* ClientMain '''  
+``` javac -cp .:../lib/* *.java  ```
+``` java -cp .:../lib/* ServerMain  ```  
+``` javac -cp .:../lib/* ClientMain ```  
